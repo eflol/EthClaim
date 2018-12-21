@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="./js/bignumber.min.js"></script>
+<script type="text/javascript" src="./js/web3.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="./js/jquery.min.1.12.4.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/truffle-contract.js"></script>
+<script src="./js/app.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./css/w3.css">
+<link rel="stylesheet" type="text/css" href="./css/Roboto.css">
+<link rel="stylesheet" type="text/css" href="./css/Lato.css">
+<script type="text/javascript">
+
+function search() {
+  try
+  {
+
+    p1addr = $('#p1addr').val();    
+    App.PHRInstance.getPerson(p1addr).then(function(scaddr) { 
+      $.getJSON('../build/contracts/Person.json', function(data) {
+        // Get the necessary contract artifact file and instantiate it with truffle-contract
+        App.PersonArtifact = data;
+        App.contracts.Person = TruffleContract(App.PersonArtifact);
+
+        // Set the provider for our contract
+        App.contracts.Person.setProvider(App.web3Provider);
+
+        // 스마트컨트렉트의 주소를 가져온 person 주소로 변경
+        App.contracts.Person.at(scaddr).then(function(instance) { 
+          App.PersonInstance = instance; 
+          App.PersonInstance.getID().then(function(pData) {
+            $('#id').val(pData);
+          });
+          App.PersonInstance.getName().then(function(pData) {
+            $('#name').val(pData);
+          });
+          App.PersonInstance.getRegistNum().then(function(pData) {
+            $('#registNum').val(pData);
+          });
+        });
+      });
+    });    
+  }
+  catch (e)
+  {
+    logs(e);
+  }
+}
+
+
+  function acqPersonInfo() {
+    try
+    {
+      message('acqPersonInfo....');
+     
+      web3.eth.defaultAccount = $('#p1addr').val();
+      HLIaddr = $('#HLIaddr').val();
+      p1addr = $('#p1addr').val();
+      p1pass = $('#p1pass').val();
+      // 정보등록자 계정 인증
+      if(web3.personal.unlockAccount(p1addr, p1pass))
+      {
+        logs("acqPersonInfo. unlock account");
+/*
+        appendAcqPI(string pOrgAddr, 
+        string pPerAddr,
+        string pPath,
+        string pAcqDate,
+        string pEndDate)
+*/
+
+        App.PHRInstance.appendAcqPI(
+        HLIaddr, 
+        p1addr,
+        "한화생명간편청구APP",
+        App.today,
+        "",
+        {gas:3000000});
+        message('wait....');
+      }                    
+    }
+    catch (e)
+    {
+      logs(e);
+    }
+  }
+</script>
+<style>
+
+body {
+  font-family: "Roboto";
+}
+
+.panel2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+  right: 3%;
+  position: relative;
+  text-align: center;
+  opacity: 0.72;
+  width: 95%
+}
+
+th {
+   vertical-align: middle !important; 
+}
+
+td {
+  text-align: left;
+  /*border: 1px solid #888888;*/
+  vertical-align: middle !important; 
+}
+
+p {
+  text-align: left;
+  font-size:10px
+  /*border: 1px solid #888888;*/
+  
+}
+
+
+
+</style>
+<body>
+  <div class="panel2">
+    <div class="w3-card-2 w3-container">    
+      <div class="w3-row-padding w3-center">  
+      <h3 class="w3-left">스마트폰 앱(고객화면)</h3>
+      <table class="w3-table" style="background-color: #eeeeee;">
+        <tr>
+          <td width=100>SC주소</td>
+          <td><input type="text" id="scAddr" size="10" ></td>
+          <td width=100>HLI주소</td>
+          <td><input type="text" id="HLIaddr" size="10" ></td>
+        </tr>
+        <tr>
+          <td>개인계정</td>
+          <td><input type="text" id="p1addr" size="10" ><input type="button" value="개인조회" onclick="search()"></td>
+          </td>
+          <td width=70> Pass </td>
+          <td><input type="password" id="p1pass" value="lap243lap" size="10">
+          </td>
+        </tr>
+      </table>
+      <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel2">
+    <div class="w3-card-2 w3-container">    
+      <div class="w3-row-padding w3-center">  
+        <table class="w3-table-all w3-card-4">
+          <thead>
+          <tr class="w3-black">
+          <th colspan="2">보험금 청구서 발행</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width=140>ID</td><td>: <input type="text" id="id" class="w3-border w3-border-dark-grey" value=""  readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <td width=140>성명</td><td>: <input type="text" id="name" class="w3-border w3-border-dark-grey" value=""  readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <td>주민등록번호</td><td>: <input type="text" id="registNum" class="w3-border w3-border-dark-grey" value="" readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <td>연락처</td><td>: <input type="text" id="telephone" class="w3-border w3-border-dark-grey" value="" size="20"></td>
+            </tr>
+            <tr>
+              <td>은행</td><td>: <input type="text" id="bankName" class="w3-border w3-border-dark-grey" value="" readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <td>계좌번호</td><td>: <input type="text" id="bankAccount" class="w3-border w3-border-dark-grey" value="" readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <br>
+            <br>
+
+          </tbody>
+        
+        </table>            
+            <br>
+        <!-- 개인블록체인ID -->        
+개인(인증)정보수집 동의 <input type="button" class="w3-btn w3-white w3-border w3-border-dark-grey w3-round-large" id="attach1" value="동의" onclick="document.getElementById('id01').style.display='block'" > 
+        <br>
+        <br>
+      <input type="button" class="w3-btn w3-white w3-border w3-border-dark-grey w3-round-large" id="attach1" value=" 청 구 " onClick="location.href='DP4claim_doctran.html'"> 
+      <br>
+      <br>
+      <div id="messages"></div>
+        <div id="logs" style="text-align: left;"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-container">
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content" style="opacity: 1;">
+        <header class="w3-dark-grey"> 
+          <h3>개인정보 수집,이용 동의</h3>
+        </header>
+        <div class="w3-container">
+          <p>당사는 보험금 간편 청구 APP 관련 개인정보를 취급함에 있어 "개인정보보호법" 및 정보통신망 이용촉진 및 정보보호 등에 관한 법률" 등의 개인정보보호 관련 법령을 준수하고 있습니다.</p>
+          <p>귀하의 보험금청구관련정보(개인정보 포함)의 수집․ 이용․ 편집과 개인정보의 제3자 제공 업무 등을 실시하기 위하여 귀하의 동의를 구합니다.</p>
+          <h3>개인정보 수집·이용 동의서</h3>
+          
+          <p>▣ 수집정보 항목 : 성명, 생년월일, 의무기록, 이메일주소</p>
+          <p>▣ 개인정보수집·이용 목적 : 보험금 지급 심사를 위한 의료정보 조회 업무에 활용</p>
+          <p>▣ 수집된 정보의 보유 및 이용기간 : 제공 받는자의 개인정보 이용목적 달성시 까지</p>
+          <p>▣ 귀하는 본「개인정보 수집·이용 동의서」의 동의사항을 거부할 권리가 있으며, 거부할 시에는 귀하의 청구가 진행 거부되실 수 있사오니 유의하시기 바랍니다.</p>
+          <p>본인은 협의회의 개인정보 수집· 이용 동의서 내용을 확인하였으며, 이에 따라 청구진행에 필요한 개인정보 포함를 당사 가 수집 ․ 이용 ․ 편집하는데 대하여 동의합니다.</p>
+
+          <h3>개인정보 제3자 제공 동의서</h3>
+          <p>▣ 수집된 정보의 제3자 제공</p>
+          <p>- 수집정보 항목 : 성명, 생년월일, 의무기록, 이메일주소</p>
+          <p>- 제공받는자 : 여기, 저기...</p>
+          <p>▣ 개인정보수집·이용 목적 : 보험금 지급 심사를 위한 의료정보 조회 업무에 활용</p>
+          <p>▣ 수집된 정보의 보유 및 이용기간 : 제공 받는자의 개인정보 이용목적 달성시 까지</p>
+          <p>▣ 귀하는 본「개인정보 수집·이용 동의서」의 동의사항을 거부할 권리가 있으며, 거부할 시에는 귀하의 청구가 진행 거부되실 수 있사오니 유의하시기 바랍니다.</p>
+          <p>본인은 협의회의 개인정보 수집· 이용 동의서 내용을 확인하였으며, 이에 따라 청구진행에 필요한 개인정보 포함를 당사 가 수집 ․ 이용 ․ 편집하는데 대하여 동의합니다.</p>
+        </div>
+        <footer class="w3-dark-grey">
+          <p><button onclick="acqPersonInfo(); document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-black">동의</button>
+          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-black">닫기</button>
+          </p>
+                  
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

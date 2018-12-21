@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="./lib/bignumber.min.js"></script>
+<script type="text/javascript" src="./lib/web3.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/w3.css">
+<link rel="stylesheet" type="text/css" href="./css/Roboto.css">
+<link rel="stylesheet" type="text/css" href="./css/Lato.css">
+<style>
+
+body {
+	font-family: "Roboto";
+	letter-spacing: 7px;
+}
+
+.times {
+	letter-spacing: 0px;
+}
+
+.panel {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	text-align: left;
+	opacity: 0.60;
+}
+
+.panel2 {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	float: right;
+	right: 20%;
+	position: relative;
+	text-align: center;
+	opacity: 0.72;
+	width: 60%
+}
+
+input {
+	padding: 3px 4px;
+	margin: 4px 0;
+	display: inline-block;
+	border: 1px solid #3CBC8D;
+	border-radius: 4px;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+input[type="number"] {
+	width: 100px;
+}
+
+th {
+	text-align: left;
+	font-size:large;	
+	font-family:"Segoe UI",Arial,sans-serif;
+	font-weight: bold;
+}
+
+td {
+	text-align: left;
+}
+
+</style>
+<body>
+    <div class="panel2">
+      <div class="w3-card-2 w3-container" style="min-height:60px">        
+		<form method="POST" action="http://127.0.0.1:8500/bzz:/" enctype="multipart/form-data">
+		  <input type="file" name="dir1/file.txt">
+		  <input type="submit" value="upload">
+		</form>
+		</div>
+	</div>
+</body>
+</html>

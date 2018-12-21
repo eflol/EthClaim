@@ -1,0 +1,390 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="./lib/bignumber.min.js"></script>
+<script type="text/javascript" src="./lib/web3.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/w3.css">
+<link rel="stylesheet" type="text/css" href="./css/Roboto.css">
+<link rel="stylesheet" type="text/css" href="./css/Lato.css">
+<script type="text/javascript">
+    var Web3 = require('web3');
+    var web3 = new Web3();
+
+    
+    web3.setProvider(new web3.providers.HttpProvider("http://localhost:8552"));
+
+    var contractAddress = "0x09cc1e69Eae7bCBcdecfD594DB062ac779c02DeD";
+
+    var contract = web3.eth.contract([ { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRdiseaseCode", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "pAddr", "type": "string" }, { "name": "pName", "type": "string" }, { "name": "pID", "type": "string" }, { "name": "pRegistNum", "type": "string" }, { "name": "pBirth", "type": "string" }, { "name": "pGender", "type": "string" } ], "name": "appendPerson", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "logTest", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "s", "type": "string" } ], "name": "stringToAddress", "outputs": [ { "name": "", "type": "address", "value": "0x" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRtreatDate", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRclsData", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "pOrgAddr", "type": "string" }, { "name": "pStaff", "type": "string" } ], "name": "appendOrgStaff", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "pAddr", "type": "string" } ], "name": "getPersonIdx", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPerAddr", "type": "string" } ], "name": "getMRLength", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRmedStaff", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "orgAddr", "type": "string" } ], "name": "getOrg", "outputs": [ { "name": "", "type": "address", "value": "0x0000000000000000000000000000000000000000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "pOrgAddr", "type": "string" }, { "name": "pDept", "type": "string" } ], "name": "appendOrgDept", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRdepart", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "pAddr", "type": "string" }, { "name": "pName", "type": "string" }, { "name": "pPurpose", "type": "string" } ], "name": "appendOrg", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRmedOrgAddr", "outputs": [ { "name": "", "type": "address", "value": "0x" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "pPsIdx", "type": "uint256" }, { "name": "pMRIdx", "type": "uint256" } ], "name": "getMRattachKey", "outputs": [ { "name": "", "type": "bytes1[200]", "value": [ "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x", "0x" ] } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "pAddr", "type": "string" } ], "name": "getPerson", "outputs": [ { "name": "", "type": "address", "value": "0x0000000000000000000000000000000000000000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "pAddr", "type": "string" }, { "name": "pMedOrgAddr", "type": "string" }, { "name": "pTreatDate", "type": "string" }, { "name": "pDiseaseCode", "type": "string" }, { "name": "pDepart", "type": "string" }, { "name": "pMedStaff", "type": "string" }, { "name": "pClsData", "type": "string" }, { "name": "pAttachKey", "type": "string" } ], "name": "appendMR", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "str", "type": "string" } ], "name": "log", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "str", "type": "string" } ], "name": "Message", "type": "event" } ]).at(contractAddress);
+    
+    /***************************************************
+    시스템을 사용하기 위해 초기 사용자, 병원을 등록한다.
+    appendPerson  RA에서 등록 0x33DCDc9251a3d6D05A9A7898c227fB9adE6b38a5
+    0x5347AE295af75a65d554CCA55F747895994655Ac
+    홍길동
+    HONG19
+    760707-1111111
+    1976-07-07
+    M
+    -----------------------------------------------
+    appendOrg RA에서 등록 0x33DCDc9251a3d6D05A9A7898c227fB9adE6b38a5
+    0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    성모병원
+    의료행위
+    -----------------------------------------------
+    appendOrgStaff 병원에서 등록 100,000 gas 0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    박성광
+    
+    0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    허준
+    -----------------------------------------------
+    appendOrgDept 병원에서 등록 100,000 gas 0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    내과
+    
+    0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613
+    외과
+    *****************************************************/
+    function logtest() {
+      try
+      {
+        var raAddress = "0x33DCDc9251a3d6D05A9A7898c227fB9adE6b38a5";
+        var hospitalAddress = "0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613";
+  
+        message('init....');
+        web3.eth.defaultAccount = raAddress;
+        // 사용자등록, 병원등록
+        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
+        {
+          console.log("로그테스트");
+          contract.logTest(); 
+        }    
+        
+             
+      }
+      catch (e)
+      {
+        alert("1");
+        console.log(e);
+      }          
+    }
+
+    function init() {
+      try
+      {
+        var raAddress = "0x33DCDc9251a3d6D05A9A7898c227fB9adE6b38a5";
+        var hospitalAddress = "0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613";
+  
+        message('init....');
+        web3.eth.defaultAccount = raAddress;
+                     
+          // 사용자등록, 병원등록
+        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
+        {
+          console.log("사용자등록. unlock account");
+          contract.appendPerson("0x5347AE295af75a65d554CCA55F747895994655Ac", "홍길동", "HONG19", "760707-1111111", "1976-07-07", "M",{gas:3000000}); 
+        }        
+        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
+        {
+          console.log("사용자등록. unlock account");
+          contract.appendPerson("0xcDdEfdb7322Ba35E2B4f20799690361B6732C00e", "홍길순", "HONG2", "760707-2111111", "1976-07-07", "F",{gas:3000000}); 
+        }        
+          
+        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
+        {
+          console.log("병원등록. unlock account");
+          contract.appendOrg("0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613", "성모병원", "의료행위",{gas:3000000});  
+        }        
+          
+          // 의사,진료과 등록(편의상 RA와 병원의 비번이 같음)
+        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
+        {
+          console.log("의사등록. unlock account");
+          contract.appendOrgStaff("0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613","박성광",{gas:3000000});         
+        }        
+        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
+        {
+          console.log("의사등록. unlock account");
+          contract.appendOrgStaff("0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613","허준",{gas:3000000});  
+        }
+        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
+        {
+          console.log("진료과등록. unlock account");
+          contract.appendOrgDept("0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613","내과",{gas:3000000}); 
+        }
+        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
+        {
+          console.log("진료과등록. unlock account");
+          contract.appendOrgDept("0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613","외과",{gas:3000000}); 
+        }
+        
+      }
+      catch (e)
+      {
+        alert("1");
+        console.log(e);
+      }
+    }
+    /***************************************************
+      병원에서 개인의 블록체인에 의무기록을 등록한다.
+      등록되는 정보 
+      진료일    treatDate
+      상병코드  diseaseCode
+      진료과    depart
+      담당의    medStaff
+      첨부url   attachKey
+      문서구분  cldData
+    ***************************************************/
+    function medRecUpload() {
+      try
+      {
+        message('medRecUpload....');
+        var medOrgAddr = document.getElementById("medOrgAddr").value; 
+        var addr = document.getElementById("addr").value; 
+          
+        var treatDate = document.getElementById("treatDate").value;
+        var diseaseCode = document.getElementById("diseaseCode").value;
+        var depart = document.getElementById("depart").value;
+        var medStaff = document.getElementById("medStaff").value;
+        
+        var cldData1 = "소견서";
+        var cldData2 = "처방전";
+        var cldData3 = "입퇴확인서";
+        var cldData4 = "영수증";
+        var cldData5 = "X레이";
+        var cldData6 = "CT";
+        var cldData7 = "MRI";
+        var attachKey1 = document.getElementById("txtattach1").value;
+        var attachKey2 = document.getElementById("txtattach2").value;
+        var attachKey3 = document.getElementById("txtattach3").value;
+        var attachKey4 = document.getElementById("txtattach4").value;
+        var attachKey5 = document.getElementById("txtattach5").value;
+        var attachKey6 = document.getElementById("txtattach6").value;
+        var attachKey7 = document.getElementById("txtattach7").value;
+
+        web3.eth.defaultAccount = medOrgAddr;
+                   
+        // 정보등록자(병원) 계정 인증
+        if(web3.personal.unlockAccount(medOrgAddr, document.getElementById("pass").value))
+        {
+          console.log("medRecUpload. unlock account");
+          if (attachKey1 != "") 
+          {                 
+            contract.appendMR(addr, medOrgAddr, treatDate, diseaseCode, depart, medStaff, cldData1,attachKey1,{gas:3000000});  
+            message('wait....');
+          } else {
+            message('파일이 첨부되지 않았습니다.');
+          }
+        }                    
+      }
+      catch (e)
+      {
+        console.log(e);
+      }
+    }
+
+    function message($mes) {
+      document.getElementById("messages").innerHTML = $mes;
+    }
+
+    var events = contract.allEvents();
+    events.watch(function(error, event){      
+        try
+        {
+          console.log( event );
+        }
+        catch (e)
+        {
+          console.log(e);
+        }
+      }
+    );
+
+    
+    
+    var elog = contract.log();
+    elog.watch(
+      function(err, result) 
+      {      
+        try
+        {
+          console.log( result.args.str );
+        }
+        catch (e)
+        {
+          console.log(e);
+        }
+      }
+    );
+
+  var eMsg = contract.Message();
+  eMsg.watch(
+    function(err, result) 
+    {
+      try {
+        message(result.args.str);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  );
+
+
+  function attach(item) {
+    try {
+      var target = document.getElementById("txt" + item.id);
+
+      if (item.id == "attach1") {
+        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
+      } else if (item.id == "attach2") {
+        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
+      } else if (item.id == "attach3") {
+        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
+      } else if (item.id == "attach4") {
+        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
+      } else if (item.id == "attach5") {
+        target.value = 'bzz:/34f1b928040023f6460d2638eaf34bdc91556ec0623d295647ca511d6d74d877';
+      } else if (item.id == "attach6") {
+        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
+      } else if (item.id == "attach7") {
+        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
+      } else if (item.id == "attach8") {
+        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
+      } else if (item.id == "attach9") {
+        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
+      }
+
+      alert("파일 업로드");
+
+      message(target.value);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+</script>
+<style>
+
+body {
+  font-family: "Roboto";
+  letter-spacing: 7px;
+}
+
+.times {
+  letter-spacing: 0px;
+}
+
+.panel {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+  opacity: 0.60;
+}
+
+.panel2 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  float: right;
+  right: 5%;
+  position: relative;
+  text-align: center;
+  opacity: 0.72;
+  width: 90%
+}
+
+input {
+  padding: 3px 4px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #3CBC8D;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+input[type="number"] {
+  width: 100px;
+}
+
+th {
+  text-align: left;
+  font-size:large;  
+  font-family:"Segoe UI",Arial,sans-serif;
+  font-weight: bold;
+}
+
+td {
+  text-align: left;
+}
+
+</style>
+<body>
+  <header class="panel" style="padding: 20px">
+    <h2>의무기록 업로드 </h2><input type="button" value="초기값업로드" onClick="init()"><input type="button" value="test" onClick="logtest()">   
+  </header>
+    <div class="panel2">
+        <div class="w3-card-2 w3-container" style="min-height:360px">    
+      <div class="w3-row-padding w3-center w3-margin-top">  
+        <table>
+          <thead><tr><th colspan="2">의무기록 업로드</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>환자명</td><td>:<input type="text" id="name" value="홍길동" readonly="readonly" size="20" style="background-color: gray;"></td>
+              <td>생년월일</td><td>:<input type="text" id="birth" value="1976-07-07" readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <td>진료과</td><td>:<input type="text" id="depart" value="내과" size="20"></td>
+              <td>진료의</td><td>:<input type="text" id="medStaff" value="박성광" size="20"></td>
+            </tr>
+            <tr>
+              <td>진료일</td><td>:<input type="text" id="treatDate" value="2018-09-14" size="20"></td>
+              <td>상병코드</td><td>:<input type="text" id="diseaseCode" value="T78.4" size="20"></td>
+            </tr>
+            <tr>              
+              <td>개인계정</td><td colspan="3">:<input type="text" id="addr" value="0x5347AE295af75a65d554CCA55F747895994655Ac" readonly="readonly" size="20" style="background-color: gray;"></td>         
+              
+            </tr>
+          </tbody>
+        
+        </table>            
+        <!-- 개인블록체인ID -->
+                
+        
+          <br><br>
+        <form method="POST" action="http://127.0.0.1:8500/bzz:/" enctype="multipart/form-data">         
+        <table>
+          <thead><tr><th colspan="2">문서 종류</th></tr></thead>
+          <tbody>
+        
+            <tr><td>소견서</td><td>:<input type="text" id="txtattach1" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach1" value="첨부" onclick="attach(this)" ></td></tr>
+            <tr><td>처방전</td><td>:<input type="text" id="txtattach2" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach2" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>입퇴확인서</td><td>:<input type="text" id="txtattach3" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach3" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>영수증</td><td>:<input type="text" id="txtattach4" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach4" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>X레이</td><td>:<input type="text" id="txtattach5" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach5" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>CT영상</td><td>:<input type="text" id="txtattach6" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach6" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>MRI</td><td>:<input type="text" id="txtattach7" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach7" value="첨부" onclick="attach(this)"></td></tr>
+                                      
+          </tbody>
+        
+        </table>
+        </form>
+        
+        <br><br>
+      </div>
+    </div>
+  </div>
+    <div class="panel2">
+      <div class="w3-card-2 w3-container" style="min-height:60px">        
+      <div class="w3-row-padding w3-center w3-margin-top" style="text-align:left;">      
+    I D : <input type="text" id="medOrgAddr" value="0x43E291B4A152392Dc593a9cF5b50b3d2aB12a613"> Pass : <input type="password" id="pass" value="" size="10"> <input type="button" value="저장" onClick="medRecUpload()">
+    </div>
+    
+    <div id="messages"></div>
+    </div>
+
+  </div>
+
+
+</body>
+</html>

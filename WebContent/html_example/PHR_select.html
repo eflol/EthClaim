@@ -1,0 +1,378 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="./lib/bignumber.min.js"></script>
+<script type="text/javascript" src="./lib/web3.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/w3.css">
+<link rel="stylesheet" type="text/css" href="./css/Roboto.css">
+<link rel="stylesheet" type="text/css" href="./css/Lato.css">
+<script type="text/javascript">
+    var Web3 = require('web3');
+    var web3 = new Web3();
+
+    
+    web3.setProvider(new web3.providers.HttpProvider("http://localhost:8552"));
+
+    var contractAddress = "0xa9D46Bc03D08c2EA007C86bdD5df6178B0A317cc";
+
+    var contract = web3.eth.contract([ { "constant": false, "inputs": [ { "name": "amount", "type": "uint256" } ], "name": "withdraw", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "salesStatus", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "exchangeRate", "outputs": [ { "name": "", "type": "uint256", "value": "1000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "amountInvested", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_investor", "type": "address" } ], "name": "getTokens", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getDeadline", "outputs": [ { "name": "", "type": "uint256", "value": "1525398077" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getIndex", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xf2b22bb0a44aaaf9e26be04688d2534544440343" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getNow", "outputs": [ { "name": "", "type": "uint256", "value": "1525397533" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getStart", "outputs": [ { "name": "", "type": "uint256", "value": "1525397517" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "i", "type": "uint256" } ], "name": "getInvestor", "outputs": [ { "name": "", "type": "address", "value": "0x0000000000000000000000000000000000000000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "invest", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [ { "name": "salesMinutes", "type": "uint256", "index": 0, "typeShort": "uint", "bits": "256", "displayName": "sales Minutes", "template": "elements_input_uint", "value": "500" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "str", "type": "string" } ], "name": "log", "type": "event" } ]).at(contractAddress);
+
+    var startTime = new Date(contract.getStart() * 1000);
+    var deadline = new Date(contract.getDeadline() * 1000);
+    var nowInBlockchain = new Date(contract.getNow() * 1000);
+    
+    
+    
+    function medRecUpload() {
+      try
+      {
+        var address = document.getElementById("address").value; 
+        var amount =  web3.toWei(document.getElementById("amount").value, "ether");
+        web3.eth.defaultAccount = address;
+
+        if(web3.personal.unlockAccount(address, document.getElementById("pass").value))
+        {
+          console.log("medRecUpload. unlock account");
+          console.log(amount);
+
+          contract.medRecUpload({value:amount, gas:2000000}, function(err, result) 
+		                                                     {
+		                                                       if(!err) message('구입이 완료 되었습니다');
+		                                                       else  message(err);
+		                                                     }
+		                      );
+                      
+        }
+        message('wait....');
+      }
+      catch (e)
+      {
+        console.log(e);
+      }
+    }
+
+    function withdraw() {
+      try
+      {
+        var address = document.getElementById("address").value; 
+        var amount =  web3.toWei(document.getElementById("amount").value, "ether");
+        web3.eth.defaultAccount = address;
+        
+        if(web3.personal.unlockAccount(address, document.getElementById("pass").value))
+        {
+          console.log("withdraw unlock account");
+          console.log(amount);
+
+          contract.withdraw(amount, function(err, result) 
+                                     {
+                                       if(!err) message('출금이 완료 되었습니다');
+                                       else  message(err);
+                                     }
+                      );
+                      
+        }
+        message('wait....');
+      }
+      catch (e)
+      {
+        console.log(e);
+      }
+    }
+
+    function message($mes) {
+      document.getElementById("messages").innerHTML = $mes;
+    }
+
+    function init() {
+      try
+      {
+      
+      }
+      catch (e)
+      {
+        console.log(e);
+      }
+    }
+    
+
+    setInterval(function() {init();}, 3000);
+
+    var elog = contract.log();
+    elog.watch(
+      function(err, result) 
+      {      
+        try
+        {
+          console.log( result.args.str );
+        }
+        catch (e)
+        {
+          console.log(e);
+        }
+      }
+    );
+
+/*
+
+    // 이벤트를 감지
+    var event = contract.sendResult();
+    event.watch(
+      function(err, result) 
+      {      
+        try
+        {
+          console.log("EVENT RECEIVE!");
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log( result.args.n1.toNumber() );
+
+          var amount = web3.fromWei(result.args.amount.toNumber(), "ether");
+          document.getElementById('first').innerHTML  = result.args.n1.toNumber();
+          document.getElementById('second').innerHTML = result.args.n2.toNumber();
+          document.getElementById('third').innerHTML  = result.args.n3.toNumber();
+          if(result.args.win) {
+            message('축하드립니다! ' + amount + 'ETHER 를 얻었습니다.');
+          } else {
+            message('다음기회를 이용해주세요');
+          }
+          refreshBalance();
+        }
+        catch (e)
+        {
+          console.log(e);
+        }
+      }
+    );
+
+    //잔고를 출력합니다
+    function refreshAccounts() {
+      try
+      {
+        document.getElementById("tablePlace").innerText = " ";
+        var idiv = document.createElement('div');
+        document.getElementById("tablePlace").appendChild(idiv);
+        
+        var list = web3.eth.accounts;
+        var total = 0;
+        var input = "<table>";
+
+        input += "<TR><TD><strong> Account </strong></TD><TD><strong>Balance</strong></td></TR>";
+        for(var i = 0; i < list.length ; i++ ) {
+          var tempB = parseFloat(web3.fromWei(web3.eth.getBalance(list[i]), "ether"));
+          input += "<tr><td>" + list[i] + "</TD><TD>" + tempB + " ETHER</td></TR>";
+          total += tempB;
+        }
+
+        input += "<TR><TD><strong> TOTAL </strong></TD><TD><strong>" + total + " ETHER</strong></td></TR></table>";
+
+        idiv.innerHTML = input;
+        web3.eth.filter('latest').watch(function() { refreshAccounts(); });        
+      }
+      catch (e)
+      {
+        console.log(e);
+      }
+    }
+*/
+
+
+	// 첨부버튼 클릭시 IPFS에 파일 업로드한 주소를 attach에 셋팅
+	/*
+			<tr><td>소견서</td><td>:<input type="text" id="attach1" value="" readonly="readonly" size="40"><input type="button" id="btnA1" value="첨부" onclick="attach(this)" ></td></tr>
+			<tr><td>처방전</td><td>:<input type="text" id="attach2" value="" readonly="readonly" size="40"><input type="button" id="btnA2" value="첨부" onclick="attach(this)"></td></tr>
+			<tr><td>입퇴확인서</td><td>:<input type="text" id="attach3" value="" readonly="readonly" size="40"><input type="button" id="btnA3" value="첨부" onclick="attach(this)"></td></tr>
+			<tr><td>영수증</td><td>:<input type="text" id="attach4" value="" readonly="readonly" size="40"><input type="button" id="btnA4" value="첨부" onclick="attach(this)"></td></tr>
+			<tr><td>X레이</td><td>:<input type="text" id="attach5" value="" readonly="readonly" size="40"><input type="button" id="btnA5" value="첨부" onclick="attach(this)"></td></tr>
+			<tr><td>CT영상</td><td>:<input type="text" id="attach6" value="" readonly="readonly" size="40"><input type="button" id="btnA6" value="첨부" onclick="attach(this)"></td></tr>
+			<tr><td>MRI</td><td>:<input type="text" id="attach7" value="" readonly="readonly" size="40"><input type="button" id="btnA7" value="첨부" onclick="attach(this)"></td></tr>							
+*/	
+function attach(item) {
+	try {
+		var target = document.getElementById("txt"+item.id);
+		
+		target.value = '';
+		/*
+		bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2/
+			bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278
+				bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95
+					bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb
+						bzz:/34f1b928040023f6460d2638eaf34bdc91556ec0623d295647ca511d6d74d877
+							5d44011b97776bd97bc822d114d36b4f81ad1496993c2e7b04fbc54411cc0577
+
+						*/
+		alert("[분산파일시스템] 업로드");
+
+		message(target.value);
+	} catch (e) {
+		console.log(e);
+	}
+}
+function fload(frm) {
+	try {
+		alert("fload"+frm);
+		var obj = frm.contentWindow.document.all[3].innerHTML;
+		alert("fload"+obj);
+
+	} catch (e) {
+		console.log(e);
+	}
+}
+function floadd(frm) {
+	try {
+		alert("floadd"+frm);		
+		var obj = frm.contentWindow.document.getElementsByName('pre').innerHTML;
+		alert("fload"+obj);
+
+	} catch (e) {
+		console.log(e);
+	}
+}
+function fsubmit(frm) {
+	try {
+		alert("fsubmit"+frm);		
+		var obj = frm.contentWindow.document.getElementsByName('pre').innerHTML;
+		alert("업로드"+obj);
+
+	} catch (e) {
+		console.log(e);
+	}
+}
+		
+</script>
+<style>
+
+body {
+	font-family: "Roboto";
+	letter-spacing: 7px;
+}
+
+.times {
+	letter-spacing: 0px;
+}
+
+.panel {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	text-align: left;
+	opacity: 0.60;
+}
+
+.panel2 {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	float: right;
+	right: 20%;
+	position: relative;
+	text-align: center;
+	opacity: 0.72;
+	width: 60%
+}
+
+input {
+	padding: 3px 4px;
+	margin: 4px 0;
+	display: inline-block;
+	border: 1px solid #3CBC8D;
+	border-radius: 4px;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+input[type="number"] {
+	width: 100px;
+}
+
+th {
+	text-align: left;
+	font-size:large;	
+	font-family:"Segoe UI",Arial,sans-serif;
+	font-weight: bold;
+}
+
+td {
+	text-align: left;
+}
+
+</style>
+<body>
+	<header class="panel" style="padding: 20px">
+		<h2>의무기록 업로드</h2>
+	</header>
+    <div class="panel2">
+      	<div class="w3-card-2 w3-container" style="min-height:360px">    
+			<div class="w3-row-padding w3-center w3-margin-top">	
+				<table>
+					<thead><tr><th colspan="2">의무기록 업로드</th></tr></thead>
+					<tbody>
+						<tr>
+							<td>환자명</td><td>:<input type="text" id="name" value="홍길동" readonly="readonly" size="20"></td>
+							<td>생년월일</td><td>:<input type="text" id="birth" value="1976.07.07" readonly="readonly" size="20"></td>
+						</tr>
+						<tr>
+							<td>진료과</td><td>:<input type="text" id="depart" value="내과" size="20"></td>
+							<td>진료의</td><td>:<input type="text" id="staff" value="박성광" size="20"></td>
+						</tr>
+					</tbody>
+				
+				</table>		        
+				
+			    <br><br>
+				<form method="POST" action="http://127.0.0.1:8500/bzz:/" enctype="multipart/form-data">			    
+				<table>
+					<thead><tr><th colspan="2">문서 종류</th></tr></thead>
+					<tbody>
+						<tr>
+							<td>
+								<select>
+									<option value="소견서">소견서</option>
+									<option>처방전</option>
+									<option>입퇴확인서</option>
+									<option>영수증</option>
+									<option>X레이</option>
+									<option>CT영상</option>
+									<option>MRI</option>
+									<option>...</option>									
+								</select>
+							</td>
+							<td>:<input type="file" name="dir1/file.txt">
+							<input type="submit" value="upload">
+							<input type="button" id="attach1" value="첨부" onclick="alert(document.all[3].innerHTML)" >
+							<input type="text" id="txtattach1" value="" readonly="readonly" size="40"></td></tr>
+							
+<iframe name="ifrm" id="ifrm" src="attach.html" accesskey="ifrm" onload="fload(this)" onsubmit="fsubmit(this)" onloadeddata="floadd(this)">
+</iframe>							
+					<!-- 
+						<tr><td>소견서</td><td>:<input type="text" id="txtattach1" value="" readonly="readonly" size="40"><input type="button" id="attach1" value="첨부" onclick="attach(this)" ></td></tr>
+						<tr><td>처방전</td><td>:<input type="text" id="txtattach2" value="" readonly="readonly" size="40"><input type="button" id="attach2" value="첨부" onclick="attach(this)"></td></tr>
+						<tr><td>입퇴확인서</td><td>:<input type="text" id="txtattach3" value="" readonly="readonly" size="40"><input type="button" id="attach3" value="첨부" onclick="attach(this)"></td></tr>
+						<tr><td>영수증</td><td>:<input type="text" id="txtattach4" value="" readonly="readonly" size="40"><input type="button" id="attach4" value="첨부" onclick="attach(this)"></td></tr>
+						<tr><td>X레이</td><td>:<input type="text" id="txtattach5" value="" readonly="readonly" size="40"><input type="button" id="attach5" value="첨부" onclick="attach(this)"></td></tr>
+						<tr><td>CT영상</td><td>:<input type="text" id="txtattach6" value="" readonly="readonly" size="40"><input type="button" id="attach6" value="첨부" onclick="attach(this)"></td></tr>
+						<tr><td>MRI</td><td>:<input type="text" id="txtattach7" value="" readonly="readonly" size="40"><input type="button" id="attach7" value="첨부" onclick="attach(this)"></td></tr>
+						 -->													
+					</tbody>
+				
+				</table>
+				</form>
+  			
+				<br><br>
+			</div>
+		</div>
+	</div>
+    <div class="panel2">
+      <div class="w3-card-2 w3-container" style="min-height:60px">        
+	    <div class="w3-row-padding w3-center w3-margin-top" style="text-align:left;">      
+		I D : <input type="text" id="address" value="0xf2b22bb0a44aaaf9e26be04688d2534544440343"> Pass : <input type="password" id="pass" value="" size="10"> <input type="button" value="저장" onClick="medRecUpload()">
+		</div>
+
+		<h4 id="messages"></h4>
+		</div>
+
+	</div>
+	<script>init();</script>
+
+</body>
+</html>

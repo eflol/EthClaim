@@ -1,0 +1,598 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="./js/bignumber.min.js"></script>
+<script type="text/javascript" src="./js/web3.js"></script>
+<script type="text/javascript" src="./js/require.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="./js/jquery.min.1.12.4.js"></script>
+<script src="./js/truffle-contract.js"></script>
+<script src="./js/app.js"></script>
+
+
+<!-- 
+<script src="./js/bootstrap.min.js"></script>
+
+<script src="./js/path.js"></script>
+<script src="./js/swarm/swarm.js"></script>
+<script src="./js/swarm/swarm.js"></script>
+<script src="./js/swarm/swarm-hash.js"></script>
+<script src="./js/swarm/api-browser.js"></script>
+<script src="./js/swarm/api-node.js"></script>
+<script src="./js/swarm/files.js"></script>
+<script src="./js/swarm/pick.js"></script>
+<script src="./js/swarm.min.js"></script>
+
+-->
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="./css/w3.css">
+<link rel="stylesheet" type="text/css" href="./css/Roboto.css">
+<link rel="stylesheet" type="text/css" href="./css/Lato.css">
+<script type="text/javascript">
+ 
+const r = require('requirejs');
+alert(sw.hostname());
+
+function search() {
+  try
+  {
+
+    p1addr = $('#p1addr').val();    
+    App.PHRInstance.getPerson(p1addr).then(function(scaddr) { 
+      $.getJSON('../build/contracts/Person.json', function(data) {
+        // Get the necessary contract artifact file and instantiate it with truffle-contract
+        App.PersonArtifact = data;
+        App.contracts.Person = TruffleContract(App.PersonArtifact);
+
+        // Set the provider for our contract
+        App.contracts.Person.setProvider(App.web3Provider);
+
+        // 스마트컨트렉트의 주소를 가져온 person 주소로 변경
+        App.contracts.Person.at(scaddr).then(function(instance) { 
+          App.PersonInstance = instance; 
+          //App.PersonInstance.contract.address  = scaddr;
+          App.PersonInstance.getName().then(function(pData) {
+            $('#name').val(pData);
+          });
+          App.PersonInstance.getBirth().then(function(pData) {
+            $('#birth').val(pData);
+          });
+          App.PersonInstance.getRegistNum().then(function(pData) {
+            $('#registNum').val(pData);
+          });
+          App.PersonInstance.getGender().then(function(pData) {
+            $('#gender').val(pData);
+          });
+        });
+      });
+    });    
+  }
+  catch (e)
+  {
+    logs(e);
+  }
+}
+
+
+  /***************************************************
+    병원에서 개인의 블록체인에 의무기록을 등록한다.
+    등록되는 정보 
+    진료일    treatDate
+    상병코드  diseaseCode
+    진료과    depart
+    담당의    medStaff
+    첨부url   attachKey
+    문서구분  cldData
+  ***************************************************/
+  function medRecUpload() {
+    try
+    {
+      message('medRecUpload....');
+      var addr = document.getElementById("p1addr").value; 
+        
+      var medOrgAddr = document.getElementById("medOrgAddr").value; 
+      var treatDate = document.getElementById("treatDate").value;
+      var diseaseCode = document.getElementById("diseaseCode").value;
+      var depart = document.getElementById("depart").value;
+      var medStaff = document.getElementById("medStaff").value;
+      var clsData = document.getElementById("clsData").value;
+      
+
+      var attachKey1 = document.getElementById("txtattach1").value;      
+
+      web3.eth.defaultAccount = medOrgAddr;
+                 
+      // 정보등록자(병원) 계정 인증
+      if(web3.personal.unlockAccount(medOrgAddr, $('#medOrgpass').val()))
+      {
+        logs("medRecUpload. unlock account");
+        if (attachKey1 != "") 
+        {                 
+          App.PHRInstance.appendMR(addr, medOrgAddr, treatDate, diseaseCode, depart, medStaff, clsData,attachKey1,{gas:3000000});  
+          /*
+          App.PHRInstance.getPerson(addr)
+            .then(function(object) 
+                  {
+                    object.appendMR(medOrgAddr, treatDate, diseaseCode, depart, medStaff, clsData,attachKey1,{gas:3000000});
+                  }
+                  );
+                  */
+          message('wait....');
+        } else {
+          message('파일이 첨부되지 않았습니다.');
+        }
+      }                    
+    }
+    catch (e)
+    {
+      logs(e);
+    }
+  }
+
+  function upload(){
+    form = document.frmsubmit;
+    form.target = "ifrm";
+    form.submit();
+    //alert("complete");
+    document.getElementById('id01').style.display='none';
+  }
+
+  function attach(item) {
+    try {
+      var target = document.getElementById("txt" + item.id);
+
+      if (item.id == "attach1") {
+        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
+      } else if (item.id == "attach2") {
+        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
+      } else if (item.id == "attach3") {
+        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
+      } else if (item.id == "attach4") {
+        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
+      } else if (item.id == "attach5") {
+        target.value = 'bzz:/34f1b928040023f6460d2638eaf34bdc91556ec0623d295647ca511d6d74d877';
+      } else if (item.id == "attach6") {
+        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
+      } else if (item.id == "attach7") {
+        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
+      } else if (item.id == "attach8") {
+        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
+      } else if (item.id == "attach9") {
+        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
+      }
+
+      alert("파일 업로드");
+
+      message(target.value);
+    } catch (e) {
+      logs(e);
+    }
+  }
+
+
+
+  function stest() {
+    try
+    {
+
+      var Bzz = require('web3-bzz');
+
+      var bzz = new Bzz(Bzz.givenProvider || 'http://localhost:8500');
+
+
+      // or using the web3 umbrella package
+
+      var Web3 = require('web3');
+      var web3 = new Web3();      
+      web3.setProvider(new web3.providers.HttpProvider("http://localhost:9545"));
+
+      // -> web3.bzz.currentProvider // if Web3.givenProvider was an ethereum provider it will set: "http://localhost:8500" otherwise it will set: "http://swarm-gateways.net"
+
+      // set the provider manually if necessary
+      web3.bzz.setProvider("http://localhost:8500");
+
+/*
+      var Web3 = require('web3');
+      var web3 = new Web3();
+
+      
+      web3.setProvider(new web3.providers.HttpProvider("http://localhost:9545"));
+*/
+      alert(web3.bzz);
+
+
+
+      var filename =  $("#file").val();
+
+      alert(filename);
+
+
+      client.bzz
+        .uploadDirectoryFrom(path.join(__dirname, 'my-files'))
+        .then(hash => client.bzz.list(hash))
+        .then(contents => {
+          console.log(contents) // Manifest contents describing the uploaded files
+        })
+
+
+/*
+      const client = new Erebos.SwarmClient('http://localhost:8500')
+      client.bzz
+        .upload(filename, { contentType: 'text/plain' })
+        .then(hash => client.bzz.download(hash))
+        .then(res => res.text())
+        .then(text => {
+          console.log(text) // "Hello world!"
+        })
+*/
+/*
+      const swarm = require("swarm-js").at("http://localhost:8500");
+
+      // raw data
+      swarm.upload("filename").then(function(hash) {
+          alert(hash);
+          console.log("Uploaded file. Address:", hash);
+      })
+*/
+
+      document.getElementById('id01').style.display='none';
+      /*
+
+        swarm.upload({
+          path: "/path/to/thing",      // path to data / file / directory
+          kind: "directory",           // could also be "file" or "data"
+          defaultFile: "/index.html"}) // optional, and only for kind === "directory"
+          .then(console.log)
+          .catch(console.log);
+
+        const dir = {
+          "/foo.txt": {type: "text/plain", data: "file 0"},
+          "/bar.txt": {type: "text/plain", data: "file 1"}
+        };
+        swarm.upload(dir).then(hash => {
+          console.log("Uploaded directory. Address:", hash);
+        });
+
+
+        다운로드
+        const fileHash = "a5c10851ef054c268a2438f10a21f6efe3dc3dcdcc2ea0e6a1a7a38bf8c91e23";
+        swarm.download(fileHash).then(array => {
+          console.log("Downloaded file:", swarm.toString(array));
+        });
+
+        스웜해시
+        console.log(swarm.hash("unicode string áéíóú λ"));
+        console.log(swarm.hash("0x41414141"));
+        console.log(swarm.hash([65, 65, 65, 65]));
+        console.log(swarm.hash(new Uint8Array([65, 65, 65, 65])));
+      */
+    }
+    catch (e)
+    {
+      alert(e);
+    }
+  }
+
+
+/*
+app.js 로 이전
+  var events;
+  var elog;
+  var eMsg;
+  function eventInit() {
+    events = App.PHRInstance.allEvents();
+    alert(App.PHRInstance);
+    alert(events);
+
+    events.watch(function(error, event){      
+        try
+        {
+          logs( event );
+        }
+        catch (e)
+        {
+          logs(e);
+        }
+      }
+    );
+
+    elog = App.PHRInstance.log();
+    elog.watch(
+      function(err, result) 
+      {      
+        try
+        {
+          logs( result.args.str );
+        }
+        catch (e)
+        {
+          logs(e);
+        }
+      }
+    );
+
+    eMsg = App.PHRInstance.Message();
+    eMsg.watch(
+      function(err, result) 
+      {
+        try {
+          message(result.args.str);
+        } catch (e) {
+          logs(e);
+        }
+      }
+    );
+    alert("eventInit");
+  }
+  */
+  function appOnLoad() {
+    try {
+      $("#treatDate").val(App.today);
+      //alert("appOnLoad");
+
+
+
+      /*
+      const client = new SwarmClient('http://localhost:8500') // only client.bzz will be available
+
+      const client = new SwarmClient({
+        bzz: 'http://localhost:8500',
+        ipc: '/path/to/swarm.ipc', // will be used to interact with Pss
+      })
+      alert(filename);
+*/
+    } catch (e) {
+      logs(e);
+    }
+  }
+
+
+</script>
+<style>
+
+body {
+  font-family: "Roboto";
+}
+
+.panel2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+  right: 3%;
+  position: relative;
+  text-align: center;
+  opacity: 0.72;
+  width: 95%
+}
+
+th {
+   vertical-align: middle !important; 
+}
+
+td {
+  text-align: left;
+  vertical-align: middle !important; 
+}
+
+body::-webkit-scrollbar { 
+    display: none; 
+}
+/*
+#hidden {
+  width:1px;
+  height:1px;
+  border:0;
+  }
+  */
+</style>
+   <!--script src="https://unpkg.com/@erebos/swarm-browser/dist/erebos.production.js"></script-->
+  <script>
+      //const path = require('path');
+    //const SwarmClient = require('@erebos/swarm-node');
+    //const swarm = require("swarm-js").at("http://localhost:8500"); // use http://localhost:8500 if you're running swarm 
+   
+
+    var fs = require("fs");
+    console.log(fs.readFileSync("C:\image\ide.jpg"));
+
+    const client = new Erebos.SwarmClient('http://localhost:8500')
+    //const client = new SwarmClient({ bzz: 'http://localhost:8500' })
+
+/* text upload 성공
+client.bzz
+      .upload('Hello world!', { contentType: 'text/plain' })
+      .then(hash => {alert(hash)})
+      .then(res => res.text())
+      .then(text => {
+        console.log(text) // "Hello world!"
+      });
+
+type FileEntry = {
+  data: string | Buffer,
+  path: string,
+  size?: number,
+}
+15510b959df2e9d9f2725b72e4f609117b0b00e755054ead03d856a33043ce47
+15510b959df2e9d9f2725b72e4f609117b0b00e755054ead03d856a33043ce47
+    {
+      "hash": "6a18222637cafb4ce692fa11df886a03e6d5e63432c53cbf7846970aa3e6fdf5",
+      "contentType": "application/pdf",
+      "path": "sw^3.pdf"
+    }
+
+    {
+      "contentType": "application/image",
+      "path": "C:/image/ide.jpg"
+    }
+
+    data: string | Buffer
+options?: UploadOptions
+headers?: Object
+
+5bf782ad6c937b950d6a7dbeea627f1d128770fb33b721a1f1fb256fa8fb96e3
+*/
+
+client.bzz
+      .upload({path: "C:\image\ide.jpg", kind: "file"})
+      .then(hash => {alert(hash)})
+      .then(res => res.text())
+      .then(text => {
+        console.log(text) // "Hello world!"
+      });
+
+/*
+client.bzz
+  .uploadFile({path: "C:\image\ide.jpg", kind: "file"})
+  .then(hash => client.bzz.list(hash))
+  .then(contents => console.log(contents))
+  .then(hash => alert(hash))
+  .then(contents => {
+    alert(contents) // Manifest contents describing the uploaded files
+  });
+*/
+
+/*
+
+client.bzz
+      .upload('Hello world!', { contentType: 'text/plain' })
+      .then(function(hash) {
+        client.bzz.download(hash);
+      })
+      .then(function(res) {
+        res.text();
+      })
+      .then(function(text) {
+        console.log(text); // "Hello world!"
+      });
+*/
+
+     
+  </script>
+
+
+<body>
+  <div class="panel2">
+    <div class="w3-card-2 w3-container">    
+      <div class="w3-row-padding w3-center">  
+      <h3 class="w3-left">의료기관 시스템</h3>
+      <table class="w3-table" style="background-color: #eeeeee;">
+        <tr>
+          <td width=120> S.C </td><td><input type="text" id="scAddr" size="10" ></td>
+          <td> 개인계정 </td>
+          <td><input type="text" id="p1addr" size="10" ><input type="button" value="개인조회" onclick="search()"></td>
+        </tr>
+        <tr>
+          <td width=120> 병원계정 </td><td><input type="text" id="medOrgAddr" size="10"></td>
+          <td width=100> Pass </td><td><input type="password" id="medOrgpass" value="lap243lap" size="10">
+          </td>
+        </tr>
+      </table>
+      <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel2">
+    <div class="w3-card-2 w3-container" style="min-height:360px">    
+      <div class="w3-row-padding w3-center w3-margin-top " >  
+        <table class="w3-table-all w3-card-4 ">
+          <thead><tr class="w3-black"><th colspan="4">의무기록 업로드</th></tr></thead>
+          <tbody>
+            <tr>
+              <th class="w3-cell-middle" >환자명</th><td>: <input type="text" id="name" class="w3-border w3-border-dark-grey" value="" readonly="readonly" size="20" style="background-color: gray;"></td>
+              <th>생년월일</th><td>: <input type="text" id="birth" class="w3-border w3-border-dark-grey" value="" readonly="readonly" size="20" style="background-color: gray;"></td>
+            </tr>
+            <tr>
+              <th>진료과</th><td>: <input type="text" id="depart" class="w3-border w3-border-dark-grey" value="내과" size="20"></td>
+              <th>진료의</th><td>: <input type="text" id="medStaff" class="w3-border w3-border-dark-grey" value="박성광" size="20"></td>
+            </tr>
+            <tr>
+              <th>진료일</th><td>: <input type="text" id="treatDate" class="w3-border w3-border-dark-grey" value="" size="20"></td>
+              <th>상병코드</th><td>: <input type="text" id="diseaseCode" class="w3-border w3-border-dark-grey" value="" size="20"></td>
+            </tr>
+          </tbody>
+        
+        </table>            
+        <!-- 개인블록체인ID -->
+        <br><br>
+        <form method="POST" action="http://127.0.0.1:8500/bzz:/" enctype="multipart/form-data">
+        <table class="w3-table-all w3-card-4">
+          <thead><tr class="w3-black" ><th colspan="2">문서 종류</th></tr></thead>
+          <tbody>
+            <tr>
+            <td>
+              <select class="w3-select" id="clsData" name="clsData" >
+                <option value="소견서">소견서</option>
+                <option value="처방전">처방전</option>
+                <option value="입퇴확인서">입퇴확인서</option>
+                <option value="영수증" selected>영수증</option>
+                <option value="X레이">X레이</option>
+                <option value="CT영상">CT영상</option>
+                <option value="MRI">MRI</option>
+              </select>
+            </td>
+            <td >: <iframe id="hidden" name="ifrm" class="w3-border w3-border-dark-grey w3-small" style="width:500px;height:30px;position:relative;top:8px"></iframe>
+            <input type="button" id="attach1" class="w3-border w3-border-dark-grey" value="첨부" onclick="document.getElementById('id01').style.display='block'" >
+            <input type="hidden" id="txtattach1" class="w3-border w3-border-dark-grey" value="2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2" readonly="readonly" style="background-color: gray;" size="45"></td>
+            </tr>
+
+
+
+            <!--tr><td>소견서</td><td>: <input type="text" id="txtattach1" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach1" class="w3-border w3-border-dark-grey" value="첨부" onclick="document.getElementById('id01').style.display='block'" ></td></tr>
+            <tr><td>처방전</td><td>: <input type="text" id="txtattach2" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach2" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>입퇴확인서</td><td>: <input type="text" id="txtattach3" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach3" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>영수증</td><td>: <input type="text" id="txtattach4" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach4" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>X레이</td><td>: <input type="text" id="txtattach5" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach5" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>CT영상</td><td>: <input type="text" id="txtattach6" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach6" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr>
+            <tr><td>MRI</td><td>: <input type="text" id="txtattach7" class="w3-border w3-border-dark-grey" value="" readonly="readonly" style="background-color: gray;" size="45"><input type="button" id="attach7" class="w3-border w3-border-dark-grey" value="첨부" onclick="attach(this)"></td></tr-->
+                                      
+          </tbody>
+        
+        </table>
+        <br>
+        <br>
+
+        <input type="button"  class="w3-btn w3-white w3-border w3-border-dark-grey w3-round-large"  value=" 저 장 " onClick="medRecUpload()">
+
+        </form>
+        
+        <br><br>
+        <div id="messages">
+        </div>
+        <div id="logs" style="text-align: left;"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-container">
+    <div id="id01" class="w3-modal">
+      <div class="w3-modal-content" style="opacity: 1;">
+        <header class="w3-dark-grey"> 
+          <h3>&nbsp;파일 업로드 경로 지정</h3>
+        </header>
+        <div class="w3-container">
+
+        <form name="frmsubmit" method="POST" action="http://127.0.0.1:8500/bzz:/" enctype="multipart/form-data">
+        <input type="hidden" id="contents" name="contents" />
+          <input type="file" name="file" id="file">
+          <input type="button" value="upload" onClick="stest();" >
+        </form>
+
+        </div>
+        <footer class="w3-dark-grey">
+          <p>
+          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-black">닫기</button>
+          </p>                  
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

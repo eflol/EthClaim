@@ -1,0 +1,28 @@
+1. swarm 기동
+
+C:\Geth에 geth가 설치되었다고 가정
+명령프롬프트로 접속
+cd C:\Geth
+swarm --bzzaccount 1F9fB84c49e2e452C4EFFecB303d32ea1626f124 --datadir "c:\MiningTest"
+
+2. 이더리움 노드 기동
+파워셀로 접속
+트러플 프로젝트 루트로 이동
+cd C:\truffle\PHR
+truffle develop --log
+
+3. 스마트컨트렉트 배포
+파워셀로 접속
+컴파일 및 배포
+truffle migrate --network develop
+Invalid JSON RPC response 오류 발생시 reset하고 마이그레이트 한다.
+truffle migrate --reset --network develop
+
+4. 초기데이터 등록
+WAS 기동 후
+http://localhost:8080/WebContent/index.jsp 에 접속하여
+초기데이터 등록 수행
+
+[기타 참조]
+브라우저에서 require시 모듈을 못찾는 경우 브라우저화 해야함
+브라우저에서 작동하도록 browserify 사용 (webpack도 비슷)
