@@ -42,131 +42,6 @@
         logs(e);
       }          
     }
-
-/* app.js로 이동
-    function setAccounts() 
-    {
-      //$(document).on('click', '.btn-adopt', App.handleAdopt);
-      $('#scAddr')    .val(App.PHRInstance.address);
-      $('#swarmAddr').val(web3.eth.accounts[1]);
-      $('#medOrgAddr').val(web3.eth.accounts[2]);
-      $('#HLIaddr')    .val(web3.eth.accounts[4]);
-      $('#raAddr')    .val(web3.eth.accounts[5]);
-      $('#p1addr')    .val(web3.eth.accounts[3]);
-      $('#p2addr')    .val(web3.eth.accounts[6]);
-    }
-
-    function init() {
-      try
-      {
-        var raAddress =  $('#raAddr').val();
-        var hospitalAddress = $('#medOrgAddr').val();
-        var p1addr = $('#p1addr').val();
-        var p2addr = $('#p2addr').val();
-
-        message('init....');
-        web3.eth.defaultAccount = raAddress;
-                     
-          // 사용자등록, 병원등록
-        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
-        {
-          logs("사용자등록. unlock account");
-          App.PHRInstance.appendPerson(p1addr, "홍길동", "HONG19", "760707-1111111", "1976-07-07", "M",{gas:3000000}); 
-        }        
-        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
-        {
-          logs("사용자등록. unlock account");
-          App.PHRInstance.appendPerson(p2addr, "홍길순", "HONG2", "760707-2111111", "1976-07-07", "F",{gas:3000000}); 
-        }        
-          
-        if(web3.personal.unlockAccount(raAddress, document.getElementById("pass").value))
-        {
-          logs("병원등록. unlock account");
-          App.PHRInstance.appendOrg(hospitalAddress, "성모병원", "의료행위",{gas:3000000});  
-        }        
-          
-          // 의사,진료과 등록(편의상 RA와 병원의 비번이 같음)
-        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
-        {
-          logs("의사등록. unlock account");
-          App.PHRInstance.getOrg(hospitalAddress).appendStaff("박성광",{gas:3000000});         
-        }        
-        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
-        {
-          logs("의사등록. unlock account");
-          App.PHRInstance.getOrg(hospitalAddress).appendStaff("박성광",{gas:3000000});
-        }
-        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
-        {
-          logs("진료과등록. unlock account");
-          App.PHRInstance.getOrg(hospitalAddress).appendDepartment(hospitalAddress,"내과",{gas:3000000}); 
-        }
-        if(web3.personal.unlockAccount(hospitalAddress, document.getElementById("pass").value))
-        {
-          logs("진료과등록. unlock account");
-          App.PHRInstance.getOrg(hospitalAddress).appendDepartment(hospitalAddress,"외과",{gas:3000000}); 
-        }
-        
-      }
-      catch (e)
-      {
-        alert("1");
-        logs(e);
-      }
-    }
-
- 
-  var events;
-  var elog;
-  var eMsg;
-  function eventInit() {
-    events = App.PHRInstance.allEvents();
-    alert(App.PHRInstance);
-    alert(events);
-
-    events.watch(function(error, event){      
-        try
-        {
-          logs( event );
-        }
-        catch (e)
-        {
-          logs(e);
-        }
-      }
-    );
-
-    elog = App.PHRInstance.log();
-    elog.watch(
-      function(err, result) 
-      {      
-        try
-        {
-          alert(result);
-          logs( result.args.str );
-        }
-        catch (e)
-        {
-          logs(e);
-        }
-      }
-    );
-
-    eMsg = App.PHRInstance.message();
-    eMsg.watch(
-      function(err, result) 
-      {
-        try {
-          alert(result);
-          message(result.args.str);
-        } catch (e) {
-          logs(e);
-        }
-      }
-    );
-    alert("eventInit");
-  }
-  */
 </script>
 <style>
 
@@ -197,13 +72,7 @@ td {
 body::-webkit-scrollbar { 
     display: none; 
 }
-/*
-#hidden {
-  width:1px;
-  height:1px;
-  border:0;
-  }
-  */
+
 </style>
 <body>
   <div class="panel2">

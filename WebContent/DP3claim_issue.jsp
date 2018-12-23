@@ -68,13 +68,6 @@ function search() {
       if(web3.personal.unlockAccount(p1addr, p1pass))
       {
         logs("acqPersonInfo. unlock account");
-/*
-        appendAcqPI(string pOrgAddr, 
-        string pPerAddr,
-        string pPath,
-        string pAcqDate,
-        string pEndDate)
-*/
 
         App.PHRInstance.appendAcqPI(
         HLIaddr, 

@@ -33,12 +33,10 @@ App = {
 
     web3 = new Web3(App.web3Provider);
 
-
     return App.initContract();
   },
 
   initContract: function() {
-
     $.getJSON('../build/contracts/PHR.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with truffle-contract
       App.PHRArtifact = data;
@@ -184,19 +182,10 @@ App = {
 
 
     event.preventDefault();
-
-    //var petId = parseInt($(event.target).data('id'));
-
-    /*
-     * Replace me...
-     */ 
+ 
     logs("preset");
-/*
-
-*/
 
     try {
-      //$('#raAddr')    .val(web3.eth.accounts[1]);
       if ($('#raAddr').val() == undefined|| $('#raAddr').val() == null || $('#raAddr').val() == '') {
         $('#raAddr')    .val(web3.eth.accounts[1]);
       }
@@ -205,49 +194,44 @@ App = {
     }
     
     try {
-      
       if ($('#p1addr').val() == undefined || $('#p1addr').val() == null || $('#p1addr').val() == '') {
         $('#p1addr')    .val(web3.eth.accounts[2]);
       }
-       
     } catch (e) {
       logs(e);
     }
-    
     
     try {
       if ($('#p2addr').val() == undefined || $('#p2addr').val() == null || $('#p2addr').val() == '') {
         $('#p2addr')    .val(web3.eth.accounts[3]);
       }
-      //$('#p2addr')    .val(web3.eth.accounts[3]);
-    } catch (e) {
-      logs(e);
-    }
-    try {
-      if ($('#HLIaddr').val() == undefined || $('#HLIaddr').val() == null || $('#HLIaddr').val() == '') {
-        $('#HLIaddr')    .val(web3.eth.accounts[4]);
-      }
-      //$('#HLIaddr')    .val(web3.eth.accounts[4]);
-    } catch (e) {
-      logs(e);
-    }
-    try {
-      if ($('#medOrgAddr').val() == undefined || $('#medOrgAddr').val() == null || $('#medOrgAddr').val() == '') {
-        $('#medOrgAddr')    .val(web3.eth.accounts[5]);
-      }
-      //$('#medOrgAddr').val(web3.eth.accounts[5]);
-    } catch (e) {
-      logs(e);
-    }
-    try {
-      if ($('#swarmAddr').val() == undefined || $('#swarmAddr').val() == null || $('#swarmAddr').val() == '') {
-        $('#swarmAddr')    .val(web3.eth.accounts[6]);
-      }
-      //$('#swarmAddr').val(web3.eth.accounts[6]);
     } catch (e) {
       logs(e);
     }
 
+    try {
+      if ($('#HLIaddr').val() == undefined || $('#HLIaddr').val() == null || $('#HLIaddr').val() == '') {
+        $('#HLIaddr')    .val(web3.eth.accounts[4]);
+      }
+    } catch (e) {
+      logs(e);
+    }
+
+    try {
+      if ($('#medOrgAddr').val() == undefined || $('#medOrgAddr').val() == null || $('#medOrgAddr').val() == '') {
+        $('#medOrgAddr')    .val(web3.eth.accounts[5]);
+      }
+    } catch (e) {
+      logs(e);
+    }
+    
+    try {
+      if ($('#swarmAddr').val() == undefined || $('#swarmAddr').val() == null || $('#swarmAddr').val() == '') {
+        $('#swarmAddr')    .val(web3.eth.accounts[6]);
+      }
+    } catch (e) {
+      logs(e);
+    }
 
     var today = new Date();
     var dd = today.getDate();
@@ -274,34 +258,22 @@ App = {
 
   presetBtn: function(event) {
     null;
-
-
-
   },
 
   initBtn: function(event) {
     event.preventDefault();
 
-    //var petId = parseInt($(event.target).data('id'));
-
-    /*
-     * Replace me...
-     */
     logs("initBtn");
     try
     {
-
-      //var raAddress = web3.eth.accounts[0];
-      //var hospitalAddress = web3.eth.accounts[1];
 
       var raAddress =  $('#raAddr').val();
       var hospitalAddress = $('#medOrgAddr').val();
 
       message('init....');
       web3.eth.defaultAccount = raAddress;
-                   
 
-        // 사용자등록, 병원등록
+      // 사용자등록, 병원등록
       if(web3.personal.unlockAccount(raAddress, $('#rapass').val()))
       {
         logs("사용자등록. unlock account");
@@ -337,64 +309,24 @@ App = {
       {
         logs("의사등록. unlock account");
         App.PHRInstance.appendOrgStaff(hospitalAddress, "박성광", {gas:3000000}); 
-        /*
-        promiss = App.PHRInstance.getOrg(hospitalAddress);
-        promiss.then(function( value) {
-          App.OrganizationInstance.address = value;
-          App.OrganizationInstance.appendStaff("박성광",{gas:3000000});
-          logs("appendStaff 박성광");
-        }, function(reason) {
-          logs(reason);
-        });
-        */
       }
 
       if(web3.personal.unlockAccount(hospitalAddress, $('#medOrgpass').val()))
       {
         logs("의사등록. unlock account");
         App.PHRInstance.appendOrgStaff(hospitalAddress, "허준", {gas:3000000}); 
-        /*
-        promiss = App.PHRInstance.getOrg(hospitalAddress);
-        promiss.then(function(value) {
-          App.OrganizationInstance.address = value;
-          App.OrganizationInstance.appendStaff("허준",{gas:3000000});
-          logs("appendStaff 허준");
-        }, function(reason) {
-          logs(reason);
-        });
-        */
       }
 
       if(web3.personal.unlockAccount(hospitalAddress, $('#medOrgpass').val()))
       {
         logs("진료과등록. unlock account");
         App.PHRInstance.appendOrgDept(hospitalAddress, "내과", {gas:3000000}); 
-        /*
-        promiss = App.PHRInstance.getOrg(hospitalAddress);
-        promiss.then(function(value) {
-          App.OrganizationInstance.address = value;
-          App.OrganizationInstance.appendDepartment("내과",{gas:3000000});
-          logs("appendDept 내과");
-        }, function(reason) {
-          logs(reason);
-        });
-        */
       }
 
       if(web3.personal.unlockAccount(hospitalAddress, $('#medOrgpass').val()))
       {
         logs("진료과등록. unlock account");
         App.PHRInstance.appendOrgDept(hospitalAddress, "외과", {gas:3000000}); 
-        /*
-        promiss = App.PHRInstance.getOrg(hospitalAddress);
-        promiss.then(function(value) {
-          App.OrganizationInstance.address = value;
-          App.OrganizationInstance.appendDepartment("외과",{gas:3000000});
-          logs("appendDept 외과");
-        }, function(reason) {
-          logs(reason);
-        });
-        */
       }
 
     }
@@ -407,7 +339,6 @@ App = {
 
   saveBtn: function(event) {
     event.preventDefault();
-    //var petId = parseInt($(event.target).data('id'));
 
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -424,9 +355,6 @@ App = {
       });
     });
   },
-
-
-
 };
 
 $(function() {

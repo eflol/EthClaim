@@ -131,47 +131,13 @@ function search() {
   function upload(){
     document.getElementById('id01').style.display='none';
 
-    //form = document.frmsubmit;
-
     form = document.frmsubmit;
     form.target = "ifrm";
 
     form.submit();
 
   }
-/*
-  function attach(item) {
-    try {
-      var target = document.getElementById("txt" + item.id);
 
-      if (item.id == "attach1") {
-        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
-      } else if (item.id == "attach2") {
-        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
-      } else if (item.id == "attach3") {
-        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
-      } else if (item.id == "attach4") {
-        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
-      } else if (item.id == "attach5") {
-        target.value = 'bzz:/34f1b928040023f6460d2638eaf34bdc91556ec0623d295647ca511d6d74d877';
-      } else if (item.id == "attach6") {
-        target.value = 'bzz:/2020622c78075529c963538a6bbcfd571793974cb40c8770cbf07fb4f1cae5d2';
-      } else if (item.id == "attach7") {
-        target.value = 'bzz:/a7ca8732a38e69ec26dd3dfd0d985e549eed6f26122a985716c60a8279fd6278';
-      } else if (item.id == "attach8") {
-        target.value = 'bzz:/643662bcdd70191a222a0da44c99c69f60b69d301574784ac717bc97d5e50c95';
-      } else if (item.id == "attach9") {
-        target.value = 'bzz:/3af6e299408d81e5ca4fa9895ec343732202ae64e3335ba61f1f1eb70b3d3ebb';
-      }
-
-      alert("파일 업로드");
-
-      message(target.value);
-    } catch (e) {
-      logs(e);
-    }
-  }
-*/
   function appOnLoad() {
     try {
       $("#treatDate").val(App.today);

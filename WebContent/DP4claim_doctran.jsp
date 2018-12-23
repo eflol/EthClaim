@@ -135,8 +135,8 @@ function delete_all() {
 }
 function doctran() {
   var infoMsg = "";
-  infoMsg = infoMsg + "보험금청구를 진행합니다.                           " + "\n";
-  infoMsg = infoMsg + "                                                   " + "\n";
+  infoMsg = infoMsg + "보험금청구를 진행합니다.   \n";
+  infoMsg = infoMsg + " \n";
   var custcell1 = $('#p1addr').val();
 
   var my_tbody = document.getElementById('my-tbody');

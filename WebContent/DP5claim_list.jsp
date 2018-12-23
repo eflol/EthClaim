@@ -98,8 +98,8 @@ function claim() {
   var length = my_tbody.rows.length;
   if (length > 0)
   {
-    infoMsg = infoMsg + "보험금심사를 진행합니다.                           " + "\n";
-    infoMsg = infoMsg + "                                                   " + "\n";
+    infoMsg = infoMsg + "보험금심사를 진행합니다.   \n";
+    infoMsg = infoMsg + "   \n";
     for(i = 0; i < length; i++) {
       var cell1 = document.getElementById(i+'.1');
       var cell2 = document.getElementById(i+'.2');
@@ -167,15 +167,15 @@ function winOpen(bzzurl) {
 }
 
 
-  function appOnLoad() {
-    try {
-      $("#fromdate").val(App.today.substring(0,8)+'01');
-      $("#todate").val(App.today);
-      //alert("appOnLoad");
-    } catch (e) {
-      logs(e);
-    }
+function appOnLoad() {
+  try {
+    $("#fromdate").val(App.today.substring(0,8)+'01');
+    $("#todate").val(App.today);
+    //alert("appOnLoad");
+  } catch (e) {
+    logs(e);
   }
+}
 
 
 </script>
@@ -213,22 +213,6 @@ td {
     <div class="w3-card-2 w3-container">    
       <div class="w3-row-padding w3-center">  
       <h3 class="w3-left">H-FS</h3>
-      <!--table class="w3-table" style="background-color: #eeeeee;">
-        <tr>
-          <td width=100> SC주소 </td>
-          <td colspan=3><input type="text" id="scAddr" size="10" >
-          </td>
-        </tr>
-        <tr>
-          <td width=100> 당사계정 </td>
-          <td><input type="text" id="HLIaddr" value="">
-          </td>
-          <td width=100> Pass </td>
-          <td><input type="password" id="pass" value="lap243lap" size="10">
-          </td>
-        </tr>
-      </table>
-      <br-->
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@ module.exports = {
 		geth: {
 			host: "127.0.0.1",
 			port: 8552,
-      from: "0xF2B22BB0A44aaAF9e26BE04688d2534544440343", 
+			from: "0xF2B22BB0A44aaAF9e26BE04688d2534544440343", 
 			network_id: "*"
 		}
 	}
