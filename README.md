@@ -1,10 +1,10 @@
-# PHR
+# Insurance claims
 
 > Personal Health Record(Ethereum  platform)  
 > Blockchain PHR 생태계를 기반으로  
 > 소액보험금 간편청구 프로세스를 Smart Contract와 몇 개의 dApp 화면으로 단순하게 구현해본 프로젝트입니다.
 
-## 간략 프로세스 설명
+## Process
 
 - 의료기관에서 이더리움노드와 Swarm서버에 고객의 의료정보를 업로드하고,  
 - 개인(고객)이 블록체인에서 의료정보를 조회하여, 보험사에 보험금 청구의뢰를 하면,  
@@ -31,7 +31,7 @@
         └─lib             WAS에서 사용되는 라이브러리(파일 업로드 관련)  
 ```
 
-## 환경
+## Development
 
 ### node.js
 버전 : 11.5.0  `기본경로에 설치`  
@@ -75,3 +75,6 @@ truffle migrate --reset --network develop
 WAS 기동
 http://localhost:8080/WebContent/index.jsp 에서 초기화데이터 등록 버튼
 ```
+
+## License
+MIT
