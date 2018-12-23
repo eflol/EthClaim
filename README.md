@@ -12,7 +12,7 @@
 
 ## Directory
 ```
-\truffle\PHR              truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
+\truffle\EthClaim         truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
 ├─contracts               Smart Contract(solidity) 소스 .sol  
 ├─build                   truffle 에서 Smart Contract colpile 시 생성되는 아웃풋디렉토리  
 │  ├─classes  
@@ -54,9 +54,9 @@ cd C:\Geth
 swarm --bzzaccount 1F9fB84c49e2e452C4EFFecB303d32ea1626f124 --datadir "c:\MiningTest" 
 ```
 #### 2. EVM 기동
-PHR root로 이동한 후 EVM 기동
+EthClaim root로 이동한 후 EVM 기동
 ```
-cd C:\truffle\PHR  
+cd C:\truffle\EthClaim  
 truffle develop --log
 ```
 #### 3. 스마트컨트렉트 배포
