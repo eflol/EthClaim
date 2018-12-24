@@ -4,14 +4,15 @@
 > Blockchain PHR 생태계를 기반으로  
 > 소액보험금 간편청구 프로세스를 Smart Contract와 몇 개의 dApp 화면으로 단순하게 구현해본 프로젝트입니다.
 
-## Process
+## `Process`
 
 - 의료기관에서 이더리움노드와 Swarm서버에 고객의 의료정보를 업로드하고,  
 - 개인(고객)이 블록체인에서 의료정보를 조회하여, 보험사에 보험금 청구의뢰를 하면,  
 - 보험사에서 청구리스트를 조회하고, 보험시스템에서 심사 후 보험금이 지급됩니다.  
 
-## Directory
-```
+## `Directory`
+
+```text
 \truffle\EthClaim         truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
 ├─contracts               Smart Contract(solidity) 소스 .sol  
 ├─build                   truffle 에서 Smart Contract colpile 시 생성되는 아웃풋디렉토리  
@@ -26,55 +27,72 @@
     ├─backup              최초 HTML 개발버전 백업  
     ├─css                 Dapp에서 사용하는 CSS  
     ├─js                  Dapp에서 사용하는 truffle, web3, jquery 라이브러리  
-    ├─META-INF              
-    └─WEB-INF               
+    ├─META-INF
+    └─WEB-INF
         └─lib             WAS에서 사용되는 라이브러리(파일 업로드 관련)  
 ```
 
-## Development
+## `Development`
 
 ### node.js
+
 버전 : 11.5.0  `기본경로에 설치`  
 
 ### geth
+
 버전 : 1.8.2  
 
 ### truffle
-버전 : 4.1.15 
-```
+
+버전 : 4.1.15
+
+```text
 npm i truffle@4.1.15 -g
 ```
 
-## 기동절차
+## `기동절차`
 
-#### 1. swarm 기동
+### 1. swarm 기동
+
 Change swarm account, blockchain dir
-```
+
+```text
 cd C:\Geth
-swarm --bzzaccount 1F9fB84c49e2e452C4EFFecB303d32ea1626f124 --datadir "c:\MiningTest" 
+swarm --bzzaccount 1F9fB84c49e2e452C4EFFecB303d32ea1626f124 --datadir "c:\MiningTest"
 ```
-#### 2. EVM 기동
+
+### 2. EVM 기동
+
 EthClaim root로 이동한 후 EVM 기동
-```
+
+```text
 cd C:\truffle\EthClaim  
 truffle develop --log
 ```
-#### 3. 스마트컨트렉트 배포
+
+### 3. 스마트컨트렉트 배포
+
 컴파일 및 배포
-```
+
+```text
 truffle migrate --network develop
 ```
+
 Invalid JSON RPC response 오류 발생시 reset하고 마이그레이트 한다.
-```
+
+```text
 truffle migrate --reset --network develop
 ```
 
-#### 4. 초기데이터 등록
+### 4. 초기데이터 등록
+
 초기데이터 등록 수행
-```
+
+```text
 WAS 기동
 http://localhost:8080/WebContent/index.jsp 에서 초기화데이터 등록 버튼
 ```
 
-## License
+## `License`
+
 MIT
