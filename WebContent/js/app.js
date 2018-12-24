@@ -244,7 +244,7 @@ App = {
     try {
       appOnLoad();
     } catch (e) {
-      null;;
+      console.log(e);
     }
 
     return App.bindEvents();
@@ -257,7 +257,7 @@ App = {
   },
 
   presetBtn: function(event) {
-    null;
+    console.log(e);
   },
 
   initBtn: function(event) {
@@ -378,6 +378,6 @@ function logs($log) {
   }
   catch (e)
   {
-    null;
+    console.log(e);
   }
 }
