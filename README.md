@@ -1,6 +1,6 @@
-# Insurance claims
+# Insurance claims(Ethereum platform)
 
-> Personal Health Record(Ethereum  platform)  
+> Insurance claims(Ethereum platform)  
 > Blockchain PHR 생태계를 기반으로  
 > 소액보험금 간편청구 프로세스를 Smart Contract와 몇 개의 dApp 화면으로 단순하게 구현해본 프로젝트입니다.
 
@@ -13,26 +13,28 @@
 ## `Directory`
 
 ```text
-\truffle\EthClaim         truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
-├─contracts               Smart Contract(solidity) 소스 .sol  
-├─build                   truffle 에서 Smart Contract colpile 시 생성되는 아웃풋디렉토리  
+\truffle\EthClaim  # truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
+├─contracts        # Smart Contract(solidity) 소스 .sol  
+├─build            # truffle 에서 Smart Contract compile 시 생성되는 아웃풋디렉토리  
 │  ├─classes  
 │  └─contracts  
-├─test                    truffle TEST에 사용  
-├─migrations              truffle 에서 사용하는 js로 web3로 배포(블록체인 노드에 등록)하는 프로그램  
-├─.settings               eclipse porject setting  
-├─src                     WEB UI에서 사용할 Java소스 (본 프로젝트에는 필요없음)  
-├─upload                  WEB 화면에서 file upload 시 file이 임시 저장되는 경로, system call에 의해 Swarm 서버에 전송 됨  
-└─WebContent              Dapp(화면) 개발 디렉토리, Dapp(truffle 연동 jsp)프로그램 존재  
-    ├─backup              최초 HTML 개발버전 백업  
-    ├─css                 Dapp에서 사용하는 CSS  
-    ├─js                  Dapp에서 사용하는 truffle, web3, jquery 라이브러리  
+├─test             # truffle TEST에 사용  
+├─migrations       # truffle 에서 사용하는 js로 web3로 배포(블록체인 노드에 등록)하는 프로그램  
+├─.settings        # eclipse project setting  
+├─src              # WEB UI에서 사용할 Java소스 (본 프로젝트에는 필요없음)  
+├─upload           # WEB 화면에서 file upload 시 file이 임시 저장되는 경로, system call에 의해 Swarm 서버에 전송 됨  
+└─WebContent       # dApp(화면) 개발 디렉토리, dApp(truffle 연동 jsp)프로그램 존재  
+    ├─backup       # 최초 HTML 개발버전 백업  
+    ├─css          # dApp에서 사용하는 CSS  
+    ├─js           # dApp에서 사용하는 truffle, web3, jquery 라이브러리  
     ├─META-INF
     └─WEB-INF
-        └─lib             WAS에서 사용되는 라이브러리(파일 업로드 관련)  
+        └─lib      # WAS에서 사용되는 라이브러리(파일 업로드 관련)  
 ```
 
 ## `Development`
+
+package.json 참고
 
 ### node.js
 
