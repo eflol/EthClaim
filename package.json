@@ -1,0 +1,37 @@
+{
+  "name": "ethclaim",
+  "version": "0.1.0",
+  "description": "Insurance claims(Ethereum platform)",
+  "main": "truffle-config.js",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "truffle": "^4.1.15",
+    "web3": "^0.20.7"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "truffle develop --log",
+    "build": "truffle migrate --reset --network develop",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eflol/EthClaim.git"
+  },
+  "keywords": [
+    "blockchain",
+    "fintech",
+    "solidity",
+    "swarm",
+    "personal-health-record",
+    "insurance"
+  ],
+  "author": "Cho Minsu <jjokong@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eflol/EthClaim/issues"
+  },
+  "homepage": "https://github.com/eflol/EthClaim#readme"
+}
