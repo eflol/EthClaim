@@ -118,7 +118,7 @@ function search() {
 
     form = document.frmsubmit;
     form.target = "ifrm";
-
+    form.action = "/upload";
     form.submit();
 
   }
@@ -131,40 +131,6 @@ function search() {
       logs(e);
     }
   }
-
-  function test() {
-    try {
-      var bar = $('.bar');
-      var percent = $('.percent');
-      var status = $('#status');
-
-      $('form').ajaxForm({
-          beforeSend: function() {
-              status.empty();
-              var percentVal = '0%';
-              bar.width(percentVal)
-              percent.html(percentVal);
-          },
-          uploadProgress: function(event, position, total, percentComplete) {
-              var percentVal = percentComplete + '%';
-              bar.width(percentVal)
-              percent.html(percentVal);
-          },
-          success: function() {
-              var percentVal = '100%';
-              bar.width(percentVal)
-              percent.html(percentVal);
-          },
-        complete: function(xhr) {
-          status.html(xhr.responseText);
-        }
-      });
-      $('form').submit();
-    } catch (e) {
-      alert(e);
-    }
-  }
-
 </script>
 <style>
 
@@ -300,19 +266,10 @@ body::-webkit-scrollbar {
           <h3>&nbsp;파일 업로드 경로 지정</h3>
         </header>
         <div class="w3-container">
-
-          <!--form name="form" method="POST" action="http://localhost:8500/bzz:/" enctype="multipart/form-data">
+          <form name="frmsubmit" method="POST" action="/DP2medi_upload" enctype="multipart/form-data">
             <input type="file" name="file" id="file">
-            <input type="button" value="upload" onClick="test()" >
-          </form-->
-          <form name="form" method="POST" action="/DP2medi_upload" enctype="multipart/form-data">
-            <input type="file" name="file" id="file">
-            <input type="button" value="upload" onClick="submit()" >
+            <input type="button" value="upload" onClick="upload()" >
           </form>
-            <div class="progress">
-          <div class="bar"></div >
-          <div class="percent">0%</div >
-        </div>
         <div id="status"></div>
 
         </div>

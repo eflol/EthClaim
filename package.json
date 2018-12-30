@@ -2,7 +2,7 @@
   "name": "ethclaim",
   "version": "0.1.0",
   "description": "Insurance claims(Ethereum platform)",
-  "main": "truffle-config.js",
+  "main": "y./dApp/bin/www",
   "dependencies": {
     "jquery": "^3.3.1",
     "truffle": "^4.1.15",
@@ -13,9 +13,11 @@
   },
   "private": true,
   "scripts": {
-    "nodestart": "truffle develop --log",
-    "cont-build": "truffle migrate --reset --network develop",
-    "cont-test": "echo \"Error: no test specified\" && exit 1"
+    "start": "SET DEBUG=dApp:* & node ./dApp/bin/www",
+    "debug": "SET DEBUG=dApp:* & node --nolazy --inspect-brk=9229 ./dApp/bin/www",
+    "evm": "powershell -ExecutionPolicy UNRESTRICTED ./evm",
+    "mig": "powershell -ExecutionPolicy UNRESTRICTED ./migdev ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
