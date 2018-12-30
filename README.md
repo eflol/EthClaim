@@ -1,12 +1,12 @@
 # Insurance claims(Ethereum platform)
 
 > Blockchain PHR 생태계를 기반으로  
-> 소액보험금 간편청구 프로세스를 Smart Contract와 몇 개의 dApp 으로 구현한 예제 프로젝트입니다.
+> 소액보험금 간편청구 프로세스를 Smart Contract와 dApp 으로 구현한 예제 프로젝트입니다.
 
 ## `Process`
 
-- 의료기관에서 이더리움노드와 Swarm서버에 고객의 의료정보를 업로드하고,  
-- 개인(고객)이 블록체인에서 의료정보를 조회하여, 보험사에 보험금 청구의뢰를 하면,  
+- 의료기관에서 Blockchain node와 Swarm서버에 고객의 의료정보를 업로드하고,  
+- 개인(고객)이 Blockchain node에서 의료정보를 조회하여, 보험사에 보험금 청구의뢰를 하면,  
 - 보험사에서 청구리스트를 조회하고, 보험시스템에서 심사 후 보험금이 지급됩니다.  
 
 ## `Directory`
@@ -41,10 +41,10 @@
 
 ### truffle
 
-버전 : 4.1.15
+버전 : 5.0.0
 
 ```text
-npm i truffle@4.1.15 -g
+npm i truffle@5.0.0 -g
 ```
 
 그외 기타 패키지 의존성은 package.json 참고
