@@ -2,9 +2,9 @@
   "name": "ethclaim",
   "version": "0.1.0",
   "description": "Insurance claims(Ethereum platform)",
-  "main": "y./dApp/bin/www",
+  "main": "./dApp/bin/www",
   "dependencies": {
-    "truffle": "^4.1.15"
+    "truffle": "^5.0.0"
   },
   "directories": {
     "test": "test"

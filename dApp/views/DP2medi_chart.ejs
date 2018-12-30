@@ -20,7 +20,45 @@ function search() {
   try
   {
     p1addr = $('#p1addr').val();
-    App.PHRInstance.getPerson(p1addr).then(function(scaddr) {
+    //alert(p1addr);
+
+    App.PHRInstance.getPerson(p1addr).then(function(data) {
+      //alert(data);
+      var st = data.split("|"); // Delimiter is a string
+      for (var j = 0; j < st.length; j++)
+      {
+        //alert(st[j]);
+        /*************************
+        0 : 블록체인ID
+        1 : 이름
+        2 : 아이디
+        3 : 주민번호
+        4 : 생년월일
+        5 : 성별
+        *************************/
+        if ((j-1)%6 == 1) {// 이름
+          try {
+            $('#name').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 3) { // 주민번호
+          try {
+            $('#registNum').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 4) { // 생년월일
+        try {
+            $('#birth').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 5) { // 성별
+        try {
+            $('#gender').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+      } // end for
+
+/*
       $.getJSON('../build/contracts/Person.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with truffle-contract
         App.PersonArtifact = data;
@@ -47,11 +85,15 @@ function search() {
           });
         });
       });
+      */
+
     });
 
     delete_all();
+
     App.PHRInstance.getMRLength(p1addr).then(function(len) {
-      //alert(len);
+      console.log(len);
+      //alert("getMRLength " + len);
       var my_tbody = document.getElementById('my-tbody');
       // var row = my_tbody.insertRow(0); // 상단에 추가
       for(i = 0; i < len; i++) {
@@ -75,6 +117,7 @@ function search() {
       if (len > 0)
       {
         App.PHRInstance.getPersonIdx(p1addr).then(function(pIdx) {
+          console.log(pIdx);
           //alert(pIdx);
           /*********************
           처치일시 : getMRtreatDate(uint idx)
@@ -96,6 +139,8 @@ function search() {
 
           for(i = 0; i < len; i++) {
             App.PHRInstance.getMRtreatDate(pIdx, i).then(function(data) {
+              console.log(data);
+              console.log(data.length);
               //alert(data[0]);
               //alert(data.length);
               //alert(bin2string(data[1]));
