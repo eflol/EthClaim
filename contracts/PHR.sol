@@ -5,10 +5,10 @@ import "./Lib.sol";
 contract PHR {
     Person[] persons;
     Organization[] organizations;
-    
+
     event log(string str);
     event message(string str);
-    
+
     function logTest() public {
         emit log("logTest");
     }
@@ -16,7 +16,7 @@ contract PHR {
     {
         emit log("PHR.appendPerson");
         emit log(pAddr);
-       
+
         Person person = new Person();
 
         person.setPerson(pAddr, pName, pID, pRegistNum, pBirth, pGender);
@@ -24,7 +24,7 @@ contract PHR {
         persons.push(person);
 
         emit message("Success");
-        
+
     }
 
     function appendOrg(string pAddr, string pName, string pPurpose) public
@@ -36,8 +36,8 @@ contract PHR {
         organizations.push(org);
         emit message("Success");
     }
-    
-    
+
+
     function getPerson(string pAddr) public constant returns(Person) {
         //emit log("PHR.getPerson");
         //emit log("pAddr");
@@ -79,18 +79,18 @@ contract PHR {
         return ( count,  sResult);
     }
 */
-    function getPersonRecord(string pRegNum,string pName,string pBirth) public constant returns(uint8,string) 
+    function getPersonRecord(string pRegNum,string pName,string pBirth) public constant returns(uint8,string)
     {
-        bool bRegNum = true; 
-        bool bName = true; 
-        bool bBirth = true; 
+        bool bRegNum = true;
+        bool bName = true;
+        bool bBirth = true;
         uint8 count = 0;
 
         string memory sResult;
 
         for (uint8 i=0; i < persons.length; i++) {
             if (keccak256(pRegNum) == keccak256("") ) {
-                bRegNum = true;                
+                bRegNum = true;
             } else {
                 if (keccak256(persons[i].getRegistNum()) == keccak256(pRegNum)) {
                     bRegNum = true;
@@ -100,7 +100,7 @@ contract PHR {
             }
 
             if (keccak256(pName) == keccak256("") ) {
-                bName = true;                
+                bName = true;
             } else {
                 if (keccak256(persons[i].getName()) == keccak256(pName)) {
                     bName = true;
@@ -110,7 +110,7 @@ contract PHR {
             }
 
             if (keccak256(pBirth) == keccak256("") ) {
-                bBirth = true;                
+                bBirth = true;
             } else {
                 if (keccak256(persons[i].getBirth()) == keccak256(pBirth)) {
                     bBirth = true;
@@ -119,7 +119,7 @@ contract PHR {
                 }
             }
 
-            /* ÁÖ¹Î¹øÈ£, ÀÌ¸§, »ýÀÏÀÌ ¸ðµÎ ÀÏÄ¡ÇÏ¸é ¾Æ¿ô¹öÆÛ·Î º¸³¿ */
+            /* ì£¼ë¯¼ë²ˆí˜¸, ì´ë¦„, ìƒì¼ì´ ëª¨ë‘ ì¼ì¹˜í•˜ë©´ ì•„ì›ƒë²„í¼ë¡œ ë³´ëƒ„ */
             if (bRegNum && bName && bBirth) {
                 sResult = Lib.mergeStrings(sResult, Lib.addressToString(persons[i].getAddr()));
                 sResult = Lib.mergeStrings(sResult, persons[i].getName());
@@ -142,7 +142,7 @@ contract PHR {
             }
         }
     }
-    
+
 
     function appendOrgDept(string pOrgAddr, string pDept) public
     {
@@ -151,26 +151,26 @@ contract PHR {
         getOrg(pOrgAddr).appendDepartment(pDept);
         emit message("Success");
     }
-    
+
     function appendOrgStaff(string pOrgAddr, string pStaff) public
     {
         emit log("PHR.appendOrgStaff");
         // check require
         getOrg(pOrgAddr).appendStaff(pStaff);
         emit message("Success");
-    }    
+    }
 
-    function appendMR(string pAddr, string pMedOrgAddr, string pTreatDate, 
-                    string pDiseaseCode, string pDepart, string pMedStaff, 
-                    string pClsData, string pAttachKey) public 
+    function appendMR(string pAddr, string pMedOrgAddr, string pTreatDate,
+                    string pDiseaseCode, string pDepart, string pMedStaff,
+                    string pClsData, string pAttachKey) public
     {
         //emit log("PHR.appendMR");
         //emit log("PHR.appendMR 1");
-        
+
         getPerson(pAddr).appendMR(pMedOrgAddr, pTreatDate, pDiseaseCode, pDepart, pMedStaff, pClsData, pAttachKey);
-        
+
         emit message("Success");
-    }    
+    }
 
     function appendAcqPI(string pOrgAddr, string pPerAddr,
         string pPath,
@@ -195,7 +195,7 @@ contract PHR {
     {
         address orgaddr = persons[pPsIdx].getMRmedOrgAddr(pMRIdx);
         string memory org = getOrg(Lib.addressToString(orgaddr)).getName();
-        
+
         return (pMRIdx, org);
     }
 
@@ -210,28 +210,28 @@ contract PHR {
     {
         address orgaddr = persons[pPsIdx].getMRmedOrgAddr(pMRIdx);
         string memory org = getOrg(Lib.addressToString(orgaddr)).getName();
-        
+
         return (pMRIdx, Lib.strToByte(org));
     }
 */
 
 /*
-    function getMrRecord(uint pPsIdx,uint pMRIdx) public constant returns(uint8,string) 
+    function getMrRecord(uint pPsIdx,uint pMRIdx) public constant returns(uint8,string)
     {
         uint8 count = 0;
 
         string memory sResult;
 
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRtreatDate(pMRIdx));      
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRdiseaseCode(pMRIdx));    
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRdepart(pMRIdx));         
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRmedStaff(pMRIdx));       
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRclsData(pMRIdx));        
-        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRattachKey(pMRIdx));    
-        
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRtreatDate(pMRIdx));
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRdiseaseCode(pMRIdx));
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRdepart(pMRIdx));
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRmedStaff(pMRIdx));
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRclsData(pMRIdx));
+        sResult = Lib.mergeStrings(sResult, persons[pPsIdx].getMRattachKey(pMRIdx));
+
         address orgaddr = persons[pPsIdx].getMRmedOrgAddr(pMRIdx);
         string memory orgName = getOrg(Lib.addressToString(orgaddr)).getName();
-        sResult = Lib.mergeStrings(sResult, orgName);      
+        sResult = Lib.mergeStrings(sResult, orgName);
         count++;
 
         //return ( count,  Lib.strToByte1000(sResult));
@@ -239,5 +239,5 @@ contract PHR {
     }
 
  */
-    
+
 }
