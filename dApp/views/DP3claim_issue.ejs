@@ -21,7 +21,36 @@ function search() {
   {
 
     p1addr = $('#p1addr').val();
-    App.PHRInstance.getPerson(p1addr).then(function(scaddr) {
+    App.PHRInstance.getPerson(p1addr).then(function(data) {
+      var st = data.split("|"); // Delimiter is a string
+      for (var j = 0; j < st.length; j++)
+      {
+        //alert(st[j]);
+        /*************************
+        0 : 블록체인ID
+        1 : 이름
+        2 : 아이디
+        3 : 주민번호
+        4 : 생년월일
+        5 : 성별
+        *************************/
+        if ((j-1)%6 == 1) {// 이름
+          try {
+            $('#name').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 2) { // 아이디
+        try {
+            $('#id').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 3) { // 주민번호
+          try {
+            $('#registNum').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+      }
+      /*
       $.getJSON('../build/contracts/Person.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with truffle-contract
         App.PersonArtifact = data;
@@ -44,6 +73,7 @@ function search() {
           });
         });
       });
+      */
     });
   }
   catch (e)
@@ -67,13 +97,13 @@ function search() {
       {
         logs("acqPersonInfo. unlock account");
 
-        App.PHRInstance.appendAcqPI(
-        HLIaddr,
-        p1addr,
-        "한화생명간편청구APP",
-        App.today,
-        "",
-        {gas:3000000});
+        App.PHRInstance.appendAcqPI(HLIaddr,
+                                    p1addr,
+                                    "한화생명간편청구APP",
+                                    App.today,
+                                    "",
+                                    {gas:3000000});
+
         message('wait....');
       }
     }

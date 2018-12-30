@@ -1,7 +1,8 @@
-pragma solidity ^0.4.21;
+/* 20181230 dont use */
+pragma solidity ^0.5.0;
 import "./Lib.sol";
 contract Person {
-    address addr;
+    string addr;
     string ID;
     string name;
     string registNum;
@@ -11,24 +12,25 @@ contract Person {
     int32 weight;
     int32 height;
     string gender;
-    MedicalRecord[] MRs; 
+    MedicalRecord[] MRs;
     int32 numOfMR;
-    
-    
+
+
     constructor () public{}
 
-    function setPerson (string pAddr, string pName, string pID, string pRegistNum, string pBirth, string pGender) public
+    function setPerson (string memory pAddr, string memory pName, string memory pID, string memory pRegistNum, string memory pBirth, string memory pGender) public
     {
-        addr = Lib.stringToAddress(pAddr);
+        //addr = Lib.stringToAddress(pAddr);
+        addr = pAddr;
         name = pName;
         ID = pID;
         registNum = pRegistNum;
         birth = pBirth;
         gender = pGender;
-        
+
     }
     struct MedicalRecord {
-        address medOrgAddr;
+        string medOrgAddr;
         string treatDate;
         string diseaseCode;
         string depart;
@@ -36,27 +38,28 @@ contract Person {
         string clsData;
         string attachKey;
     }
-    
-    function appendMR(string pMedOrgAddr, string pTreatDate, 
-                    string pDiseaseCode, string pDepart, string pMedStaff, 
-                    string pClsData, string pAttachKey) public 
+
+    function appendMR(string memory pMedOrgAddr, string memory pTreatDate,
+                    string memory pDiseaseCode, string memory pDepart, string memory pMedStaff,
+                    string memory pClsData, string memory pAttachKey) public
     {
-       // check require   
+       // check require
        /*
         require(pMedOrgAddr != 0x0);
-        require(keccak256(pTreatDate) !=  keccak256(""));        
-        require(keccak256(pDiseaseCode) !=  keccak256(""));     
-        require(keccak256(pDepart) !=  keccak256(""));     
-        require(keccak256(pMedStaff) !=  keccak256(""));     
-        require(keccak256(pClsData) !=  keccak256(""));     
-        require(keccak256(pAttachKey) !=  keccak256(""));     
+        require(keccak256(pTreatDate) !=  keccak256(""));
+        require(keccak256(pDiseaseCode) !=  keccak256(""));
+        require(keccak256(pDepart) !=  keccak256(""));
+        require(keccak256(pMedStaff) !=  keccak256(""));
+        require(keccak256(pClsData) !=  keccak256(""));
+        require(keccak256(pAttachKey) !=  keccak256(""));
         */
-        
-        MRs.push(MedicalRecord(Lib.stringToAddress(pMedOrgAddr), pTreatDate, pDiseaseCode, pDepart, pMedStaff, pClsData, pAttachKey));
+
+        //MRs.push(MedicalRecord(Lib.stringToAddress(pMedOrgAddr), pTreatDate, pDiseaseCode, pDepart, pMedStaff, pClsData, pAttachKey));
+        MRs.push(MedicalRecord(pMedOrgAddr, pTreatDate, pDiseaseCode, pDepart, pMedStaff, pClsData, pAttachKey));
     }
-    
+
 /*
-    function getPersonRecord() public constant returns(uint8,string) {
+    function getPersonRecord() public view returns(uint8,string memory) {
         string memory sResult;
 
         sResult = Lib.mergeStrings(sResult, Lib.addressToString(addr));
@@ -70,33 +73,33 @@ contract Person {
     }
 
 */
-    function getAddr() public constant returns(address){return addr;}
-    function getName() public constant returns(string){return name;}
-    function getID() public constant returns(string){return ID;}
-    function getRegistNum() public constant returns(string){return registNum;}
-    function getBirth() public constant returns(string){return birth;}
-    function getGender() public constant returns(string){return gender;}
-    
-    function getMRLength() public constant returns(uint){return MRs.length;}
+    function getAddr() public view returns(string memory){return addr;}
+    function getName() public view returns(string memory){return name;}
+    function getID() public view returns(string memory){return ID;}
+    function getRegistNum() public view returns(string memory){return registNum;}
+    function getBirth() public view returns(string memory){return birth;}
+    function getGender() public view returns(string memory){return gender;}
 
-    function getMRtreatDate(uint idx) public constant returns(string){return MRs[idx].treatDate;}
-    function getMRdiseaseCode(uint idx) public constant returns(string){return MRs[idx].diseaseCode;}
-    function getMRdepart(uint idx) public constant returns(string){return MRs[idx].depart;}
-    function getMRmedStaff(uint idx) public constant returns(string){return MRs[idx].medStaff;}
-    function getMRclsData(uint idx) public constant returns(string){return MRs[idx].clsData;}
-    function getMRattachKey(uint idx) public constant returns(string){return MRs[idx].attachKey;}
+    function getMRLength() public view returns(uint){return MRs.length;}
+
+    function getMRtreatDate(uint idx) public view returns(string memory){return MRs[idx].treatDate;}
+    function getMRdiseaseCode(uint idx) public view returns(string memory){return MRs[idx].diseaseCode;}
+    function getMRdepart(uint idx) public view returns(string memory){return MRs[idx].depart;}
+    function getMRmedStaff(uint idx) public view returns(string memory){return MRs[idx].medStaff;}
+    function getMRclsData(uint idx) public view returns(string memory){return MRs[idx].clsData;}
+    function getMRattachKey(uint idx) public view returns(string memory){return MRs[idx].attachKey;}
 /*
 
-    function getMRtreatDate(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].treatDate);}
-    function getMRdiseaseCode(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].diseaseCode);}
-    function getMRdepart(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].depart);}
-    function getMRmedStaff(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].medStaff);}
-    function getMRclsData(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].clsData);}
-    function getMRattachKey(uint idx) public constant returns(byte[100]){return Lib.strToByte(MRs[idx].attachKey);}
+    function getMRtreatDate(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].treatDate);}
+    function getMRdiseaseCode(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].diseaseCode);}
+    function getMRdepart(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].depart);}
+    function getMRmedStaff(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].medStaff);}
+    function getMRclsData(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].clsData);}
+    function getMRattachKey(uint idx) public view returns(byte[100]){return Lib.strToByte(MRs[idx].attachKey);}
 */
 
-    
-    function getMRmedOrgAddr(uint idx) public constant returns(address){return MRs[idx].medOrgAddr;}
-    
+
+    function getMRmedOrgAddr(uint idx) public view returns(string memory){return MRs[idx].medOrgAddr;}
+
 
 }

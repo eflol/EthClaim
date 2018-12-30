@@ -21,7 +21,43 @@ function search() {
   {
 
     p1addr = $('#p1addr').val();
-    App.PHRInstance.getPerson(p1addr).then(function(scaddr) {
+    App.PHRInstance.getPerson(p1addr).then(function(data) {
+      //alert(data[0]);
+      //alert(data[1]);
+      var st = data.split("|"); // Delimiter is a string
+      for (var j = 0; j < st.length; j++)
+      {
+        //alert(st[j]);
+        /*************************
+        0 : 블록체인ID
+        1 : 이름
+        2 : 아이디
+        3 : 주민번호
+        4 : 생년월일
+        5 : 성별
+        *************************/
+        if ((j-1)%6 == 1) {// 이름
+          try {
+            $('#name').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 3) { // 주민번호
+          try {
+            $('#registNum').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 4) { // 생년월일
+        try {
+            $('#birth').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+        if ((j-1)%6 == 5) { // 성별
+        try {
+            $('#gender').val(st[j]);
+          } catch (e) { alert(e); }
+        }
+      }
+        /*
       $.getJSON('../build/contracts/Person.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with truffle-contract
         App.PersonArtifact = data;
@@ -48,6 +84,7 @@ function search() {
           });
         });
       });
+        */
     });
   }
   catch (e)
@@ -71,7 +108,7 @@ function search() {
     try
     {
       message('medRecUpload....');
-      var addr = document.getElementById("p1addr").value;
+      var p1addr = document.getElementById("p1addr").value;
 
       var medOrgAddr = document.getElementById("medOrgAddr").value;
       var treatDate = document.getElementById("treatDate").value;
@@ -91,15 +128,7 @@ function search() {
         logs("medRecUpload. unlock account");
         if (attachKey1 != "")
         {
-          App.PHRInstance.appendMR(addr, medOrgAddr, treatDate, diseaseCode, depart, medStaff, clsData, attachKey1,{gas:3000000});
-          /*
-          App.PHRInstance.getPerson(addr)
-            .then(function(object)
-                  {
-                    object.appendMR(medOrgAddr, treatDate, diseaseCode, depart, medStaff, clsData,attachKey1,{gas:3000000});
-                  }
-                  );
-                  */
+          App.PHRInstance.appendMR(p1addr, medOrgAddr, treatDate, diseaseCode, depart, medStaff, clsData, attachKey1,{gas:3000000});
           message('wait....');
         } else {
           message('파일이 첨부되지 않았습니다.');
@@ -182,7 +211,7 @@ body::-webkit-scrollbar {
         <tr>
           <td width=120> S.C </td><td><input type="text" id="scAddr" size="10" ></td>
           <td> 개인계정 </td>
-          <td><input type="text" id="p1addr" size="10" value=<%=p1addr%>/><input type="button" value="개인조회" onclick="search()"></td>
+          <td><input type="text" id="p1addr" size="10" value="<%=p1addr%>"/><input type="button" value="개인조회" onclick="search()"></td>
         </tr>
         <tr>
           <td width=120> 병원계정 </td><td><input type="text" id="medOrgAddr" size="10"></td>
@@ -202,8 +231,8 @@ body::-webkit-scrollbar {
           <thead><tr class="w3-black"><th colspan="4">의무기록 업로드</th></tr></thead>
           <tbody>
             <tr>
-              <th class="w3-cell-middle" >환자명</th><td>: <input type="text" id="name" class="w3-border w3-border-dark-grey" value=<%=name %> readonly="readonly" size="20" style="background-color: gray;"></td>
-              <th>생년월일</th><td>: <input type="text" id="birth" class="w3-border w3-border-dark-grey" value=<%=birth %> readonly="readonly" size="20" style="background-color: gray;"></td>
+              <th class="w3-cell-middle" >환자명</th><td>: <input type="text" id="name" class="w3-border w3-border-dark-grey" value="<%=name %>" readonly="readonly" size="20" style="background-color: gray;"></td>
+              <th>생년월일</th><td>: <input type="text" id="birth" class="w3-border w3-border-dark-grey" value="<%=birth %>" readonly="readonly" size="20" style="background-color: gray;"></td>
             </tr>
             <tr>
               <th>진료과</th><td>: <input type="text" id="depart" class="w3-border w3-border-dark-grey" value="내과" size="20"></td>
