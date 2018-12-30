@@ -11,10 +11,11 @@
   "directories": {
     "test": "test"
   },
+  "private": true,
   "scripts": {
-    "start": "truffle develop --log",
-    "build": "truffle migrate --reset --network develop",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "nodestart": "truffle develop --log",
+    "cont-build": "truffle migrate --reset --network develop",
+    "cont-test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

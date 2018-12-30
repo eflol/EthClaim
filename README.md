@@ -86,14 +86,22 @@ Invalid JSON RPC response 오류 발생시 reset하고 마이그레이트 한다
 truffle migrate --reset --network develop
 ```
 
+컴파일된 컨트렉트를 express에서 사용할수 있도록 이동
+
+```text
+cp .\build\contracts\*.json .\dApp\public\build\contracts\.
+```
+
 ### 4. 초기데이터 등록
 
 초기데이터 등록 수행
 
 ```text
-WAS 기동
-http://localhost:8080/WebContent/index.jsp 에서 초기화데이터 등록 버튼
+cd C:\truffle\EthClaim\dApp
+SET DEBUG=dApp:* & npm start
 ```
+
+http://localhost:8080/ 에서 초기화데이터 등록 버튼
 
 ## `License`
 
