@@ -41,16 +41,24 @@
 > version : 1.8.2  
 > Swarm doc. <https://swarm-guide.readthedocs.io/en/latest/gettingstarted.html>
 
-### truffle(Smart Contract Development Framework)
+### node modules
+
+#### truffle(Smart Contract Development Framework)
 
 > #### solidity compile, migrate, EVM develop mode
-> version : 5.0.0  
 > truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
 > ```text
-> npm i truffle@5.0.0 -g
+> cd <your-project-dir>
+> npm install
 > ```
 
-##### 그외 기타 패키지 의존성은 package.json 참고
+#### express, swarm-js
+
+> #### dApp module
+> ```text
+> cd <your-project-dir>/dApp
+> npm install
+> ```
 
 ## `기동절차`
 
