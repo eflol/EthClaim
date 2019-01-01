@@ -33,61 +33,57 @@
 └─upload              # WEB 화면에서 file upload 시 file이 임시 저장되는 경로, system call에 의해 Swarm 서버에 전송 됨  
 ```
 
-## `Development`
+## `Installation`
 
-### geth
+### go-ethreum(EVM)
 
-버전 : 1.8.2  
+> #### geth, swarm node
+> version : 1.8.2  
+> Swarm doc. <https://swarm-guide.readthedocs.io/en/latest/gettingstarted.html>
 
-### truffle
+### truffle(Smart Contract Development Framework)
 
-버전 : 5.0.0
+> #### solidity compile, migrate, EVM develop mode
+> version : 5.0.0  
+> truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
+> ```text
+> npm i truffle@5.0.0 -g
+> ```
 
-```text
-npm i truffle@5.0.0 -g
-```
-
-그외 기타 패키지 의존성은 package.json 참고
+##### 그외 기타 패키지 의존성은 package.json 참고
 
 ## `기동절차`
 
 ### 1. swarm 기동
 
-Change swarm account, blockchain dir
-
-```text
-cd C:\Geth
-swarm --bzzaccount 1F9fB84c49e2e452C4EFFecB303d32ea1626f124 --datadir "c:\MiningTest"
-```
+> ```text
+> cd <your-Geth-dir>
+> swarm --bzzaccount <your-account-here> --datadir "<your-blockchain-dir>"
+> ```
 
 ### 2. EVM 기동
 
-EthClaim root로 이동한 후 EVM 기동
-
-```text
-cd C:\truffle\EthClaim
-npm run evm (= truffle develop --log)
-```
+> ```text
+> cd <your-project-dir>
+> npm run evm (= truffle develop --log)
+> ```
 
 ### 3. 스마트컨트렉트 배포
 
-컴파일 및 배포
-express에서 사용할수 있도록 copy
-
-```text
-npm run mig (= truffle migrate --reset --network develo ; cp .\build\contracts\*.json .\dApp\public\build\contracts\.)
-```
+> #### compile, migrate
+> #### express에서 사용할수 있도록 copy
+> ```text
+> npm run mig (= truffle migrate --reset --network develo ; cp .\build\contracts\*.json .\dApp\public\build\contracts\.)
+> ```
 
 ### 4. 초기데이터 등록
 
-초기데이터 등록 수행
-
-```text
-npm start (= SET DEBUG=dApp:* & npm start)
-```
-
-http://localhost:3000/ 에서 초기화데이터 등록
+> #### 초기데이터 등록 수행
+> ```text
+> npm start (= SET DEBUG=dApp:* & npm start)
+> ```
+> http://localhost:3000/ 에서 초기화데이터 등록
 
 ## `License`
 
-MIT
+### MIT
