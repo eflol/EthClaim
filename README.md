@@ -35,26 +35,19 @@
 
 ## `Installation`
 
-### go-ethreum(EVM)
-
+> ### EVM(go-ethreum)
 > #### geth, swarm node
 > version : 1.8.2  
 > Swarm doc. <https://swarm-guide.readthedocs.io/en/latest/gettingstarted.html>
 
-### node modules
-
-#### truffle(Smart Contract Development Framework)
-
-> #### solidity compile, migrate, EVM develop mode
+> ### node modules
+> #### Contract module (truffle : solidity compile, migrate, EVM develop mode)
 > truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
 > ```text
 > cd <your-project-dir>
 > npm install
 > ```
-
-#### express, swarm-js
-
-> #### dApp module
+> #### dApp module(express, swarm-js)
 > ```text
 > cd <your-project-dir>/dApp
 > npm install
@@ -62,31 +55,26 @@
 
 ## `기동절차`
 
-### 1. swarm 기동
-
-> ```text
+> Swarm 기동
+> ```cmd
 > cd <your-Geth-dir>
 > swarm --bzzaccount <your-account-here> --datadir "<your-blockchain-dir>"
 > ```
 
-### 2. EVM 기동
-
+> EVM 기동
 > ```text
 > cd <your-project-dir>
 > npm run evm (= truffle develop --log)
 > ```
 
-### 3. 스마트컨트렉트 배포
-
-> #### compile, migrate
-> #### express에서 사용할수 있도록 copy
+> Contract migrate  
 > ```text
+> // compile, migrate  
+> // express에서 사용할수 있도록 copy
 > npm run mig (= truffle migrate --reset --network develo ; cp .\build\contracts\*.json .\dApp\public\build\contracts\.)
 > ```
 
-### 4. 초기데이터 등록
-
-> #### 초기데이터 등록 수행
+> 초기데이터 등록  
 > ```text
 > npm start (= SET DEBUG=dApp:* & npm start)
 > ```
@@ -94,4 +82,4 @@
 
 ## `License`
 
-### MIT
+MIT
