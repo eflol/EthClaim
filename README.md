@@ -35,13 +35,13 @@
 
 ## `Installation`
 
-> ### EVM(go-ethreum)
-> #### geth, swarm node
+> #### EVM(go-ethreum)
+> ##### geth, swarm node
 > version : 1.8.2  
 > Swarm doc. <https://swarm-guide.readthedocs.io/en/latest/gettingstarted.html>
 
-> ### node modules
-> #### Contract module (truffle : solidity compile, migrate, EVM develop mode)
+> #### node modules
+> ##### Contract module (truffle : solidity compile, migrate, EVM develop mode)
 > truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
 > ```text
 > cd <your-project-dir>

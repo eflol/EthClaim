@@ -1,7 +1,7 @@
 # Don't check auto-generated stuff into git
 /build/*
 /upload/*
-/dApp/public/build/contracts
+/dApp/public/build/contracts/*.json
 
 # Logs
 logs
