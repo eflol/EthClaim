@@ -44,6 +44,7 @@
 > ##### Contract module (truffle : solidity compile, migrate, EVM develop mode)
 > truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
 > ```text
+> npm install -g truffle
 > cd <your-project-dir>
 > npm install
 > ```
