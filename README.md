@@ -77,7 +77,7 @@
 
 > 초기데이터 등록  
 > ```text
-> sudo npm start (= SET DEBUG=dApp:* & npm start)
+> sudo npm start (= SET DEBUG=dApp:* & npm start) 
 > ```
 > http://localhost:3000/ 에서 초기화데이터 등록
 

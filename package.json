@@ -1,7 +1,7 @@
 {
   "name": "ethclaim",
   "version": "0.1.0",
-  "description": "Insurance claims(Ethereum platform)",
+  "description": "Simple insurance claims(Ethereum platform)",
   "main": "./dApp/bin/www",
   "dependencies": {
     "truffle": "^5.0.0"
