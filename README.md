@@ -12,7 +12,7 @@
 ## `Directory`
 
 ```text
-\truffle\EthClaim     # truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
+/truffle/EthClaim     # truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
 ├─.vscode             # VS Code setting  
 ├─build               # truffle 에서 Smart Contract compile 시 생성되는 아웃풋디렉토리  
 │  └─contracts
@@ -44,14 +44,14 @@
 > ##### Contract module (truffle : solidity compile, migrate, EVM develop mode)
 > truffle doc. <https://truffleframework.com/docs/truffle/reference/truffle-commands>
 > ```text
-> npm install -g truffle
+> sudo npm install -g truffle
 > cd <your-project-dir>
-> npm install
+> sudo npm install
 > ```
 > #### dApp module(express, swarm-js)
 > ```text
 > cd <your-project-dir>/dApp
-> npm install
+> sudo npm install
 > ```
 
 ## `기동절차`
@@ -59,25 +59,25 @@
 > Swarm 기동
 > ```cmd
 > cd <your-Geth-dir>
-> swarm --bzzaccount <your-account-here> --datadir "<your-blockchain-dir>"
+> sudo swarm --bzzaccount <your-account-here>
 > ```
 
 > EVM 기동
 > ```text
 > cd <your-project-dir>
-> npm run evm (= truffle develop --log)
+> sudo npm run evm (= truffle develop --log)
 > ```
 
 > Contract migrate  
 > ```text
 > // compile, migrate  
 > // express에서 사용할수 있도록 copy
-> npm run mig (= truffle migrate --reset --network develo ; cp .\build\contracts\*.json .\dApp\public\build\contracts\.)
+> sudo npm run mig (= truffle migrate --reset --network develop ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.)
 > ```
 
 > 초기데이터 등록  
 > ```text
-> npm start (= SET DEBUG=dApp:* & npm start)
+> sudo npm start (= SET DEBUG=dApp:* & npm start)
 > ```
 > http://localhost:3000/ 에서 초기화데이터 등록
 
