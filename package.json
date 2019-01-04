@@ -14,9 +14,11 @@
     "evm": "./evm.sh",
     "mig": "sudo ./migdev.sh ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.",
     "start": "node ./dApp/bin/www",
+
     "wevm": "powershell -ExecutionPolicy UNRESTRICTED ./evm",
     "wmig": "powershell -ExecutionPolicy UNRESTRICTED ./migdev ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.",
     "wstart": "SET DEBUG=dApp:* & node ./dApp/bin/www",
+
     "debug": "SET DEBUG=dApp:* & node --nolazy --inspect-brk=9229 ./dApp/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

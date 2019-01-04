@@ -57,34 +57,6 @@ function search() {
           } catch (e) { alert(e); }
         }
       }
-        /*
-      $.getJSON('../build/contracts/Person.json', function(data) {
-        // Get the necessary contract artifact file and instantiate it with truffle-contract
-        App.PersonArtifact = data;
-        App.contracts.Person = TruffleContract(App.PersonArtifact);
-
-        // Set the provider for our contract
-        App.contracts.Person.setProvider(App.web3Provider);
-
-        // 스마트컨트렉트의 주소를 가져온 person 주소로 변경
-        App.contracts.Person.at(scaddr).then(function(instance) {
-          App.PersonInstance = instance;
-          //App.PersonInstance.contract.address  = scaddr;
-          App.PersonInstance.getName().then(function(pData) {
-            $('#name').val(pData);
-          });
-          App.PersonInstance.getBirth().then(function(pData) {
-            $('#birth').val(pData);
-          });
-          App.PersonInstance.getRegistNum().then(function(pData) {
-            $('#registNum').val(pData);
-          });
-          App.PersonInstance.getGender().then(function(pData) {
-            $('#gender').val(pData);
-          });
-        });
-      });
-        */
     });
   }
   catch (e)
@@ -116,7 +88,6 @@ function search() {
       var depart = document.getElementById("depart").value;
       var medStaff = document.getElementById("medStaff").value;
       var clsData = document.getElementById("clsData").value;
-
 
       var attachKey1 = document.getElementById("txtattach1").value;
 
