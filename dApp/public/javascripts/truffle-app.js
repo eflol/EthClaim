@@ -378,9 +378,13 @@ function logs($log) {
   {
     console.log($log);
 
-    var time = new Date();
-    stime = (("0" + time.getHours()).slice(-2) + ":" +  ("0" + time.getMinutes()).slice(-2) + ":" + ("0" + time.getSeconds()).slice(-2));
-    document.getElementById("logs").innerHTML = stime + " - " + $log + "<br>"  + document.getElementById("logs").innerHTML;
+    logging = document.getElementById("sLog").value;
+    //alert(logging);
+    if (logging === 'ON') {
+      var time = new Date();
+      stime = (("0" + time.getHours()).slice(-2) + ":" +  ("0" + time.getMinutes()).slice(-2) + ":" + ("0" + time.getSeconds()).slice(-2));
+      document.getElementById("logs").innerHTML = stime + " - " + $log + "<br>"  + document.getElementById("logs").innerHTML;
+    }
 
   }
   catch (e)

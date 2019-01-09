@@ -11,9 +11,9 @@
   },
   "private": true,
   "scripts": {
-    "evm": "./evm.sh",
-    "mig": "sudo ./migdev.sh ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.",
-    "start": "node ./dApp/bin/www",
+    "evm": "./evm.sh &",
+    "mig": "sudo ./migdev.sh ; cp ./build/contracts/*.json ./dApp/public/build/contracts/. &",
+    "start": "node ./dApp/bin/www &",
 
     "wevm": "powershell -ExecutionPolicy UNRESTRICTED ./evm",
     "wmig": "powershell -ExecutionPolicy UNRESTRICTED ./migdev ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.",

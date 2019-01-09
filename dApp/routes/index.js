@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express',  sLog: req.query.sLog });
 });
 
 router.get('/DP0init', function(req, res, next) {
