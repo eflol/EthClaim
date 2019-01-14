@@ -1,7 +1,7 @@
 # Insurance claims(Ethereum platform)
 
-> Based on the Blockchain PHR ecosystem,
-> Implemented a claim for insurance process with Smart Contract and dAPP.
+> Based on the Blockchain PHR ecosystem,  
+> Implemented a claim for insurance process with Smart Contract and dAPP.  
 > web3, express, Swarm 1.8.2, solc 0.5, truffle 5.0
 
 ## `Process`
@@ -13,22 +13,22 @@
 ## `Directory`
 
 ```text
-/truffle/EthClaim         # About truffle project settings, Eclipse project settings  
+/truffle/EthClaim       # About truffle project settings, Eclipse project settings  
 ├─.vscode               # VS Code setting  
 ├─build                 # Smart contracts compiled from truffle
 │  └─contracts
 ├─contracts             # Smart Contract (solidity) Source .sol  
 ├─dApp                  # dApp  
-│  ├─bin               # express bin
+│  ├─bin                # express bin
 │  ├─node_modules
-│  ├─public            # express static web resource
-│  │  ├─build         # compiled contract
+│  ├─public             # express static web resource
+│  │  ├─build           # compiled contract
 │  │  │  └─contracts
 │  │  ├─images
-│  │  ├─javascripts   # truffle, web3, jquery library(Used in dApp)
-│  │  └─stylesheets   # CSS (Used in dApp)
-│  ├─routes            # express routesm, url path mapping
-│  └─views             # view source(ejs)
+│  │  ├─javascripts     # truffle, web3, jquery library(Used in dApp)
+│  │  └─stylesheets     # CSS (Used in dApp)
+│  ├─routes             # express routesm, url path mapping
+│  └─views              # view source(ejs)
 ├─migrations            # js, Programs that distribute to web3 (Used in truffle)
 ├─test                  # truffle TEST
 └─upload                # WEB file upload
