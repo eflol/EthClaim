@@ -58,7 +58,7 @@
 ## `Running`
 
 > Start swarm server
-> ```cmd
+> ```text
 > cd <your-Geth-dir>
 > sudo swarm --bzzaccount <your-account-here>
 > ```
