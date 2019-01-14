@@ -1,36 +1,37 @@
 # Insurance claims(Ethereum platform)
 
-> Blockchain PHR 생태계를 기반으로  
-> 소액보험금 간편청구 프로세스를 Smart Contract와 dApp 으로 구현한 예제 프로젝트입니다.
+> Based on the Blockchain PHR ecosystem,
+> Implemented a claim for insurance process with Smart Contract and dAPP.
+> web3, express, Swarm 1.8.2, solc 0.5, truffle 5.0
 
 ## `Process`
 
-- 의료기관에서 Blockchain node와 Swarm서버에 고객의 의료정보를 업로드하고,  
-- 개인(고객)이 Blockchain node에서 의료정보를 조회하여, 보험사에 보험금 청구의뢰를 하면,  
-- 보험사에서 청구리스트를 조회하고, 보험시스템에서 심사 후 보험금이 지급됩니다.  
+- The medical institution uploads customer medical information to the Blockchain node and Swarm server,
+- When an individual (customer) inquires about medical information from Blockchain and requests insurance companies to claim insurance,
+- The insurer will look up the claim list, and the insurance system will pay the insurance fee after the examination. 
 
 ## `Directory`
 
 ```text
-/truffle/EthClaim     # truffle 프로젝트 설정정보, 이클립스 프로젝트 설정정보  
-├─.vscode             # VS Code setting  
-├─build               # truffle 에서 Smart Contract compile 시 생성되는 아웃풋디렉토리  
+/truffle/EthClaim         # About truffle project settings, Eclipse project settings  
+├─.vscode               # VS Code setting  
+├─build                 # Smart contracts compiled from truffle
 │  └─contracts
-├─contracts           # Smart Contract(solidity) 소스 .sol  
-├─dApp                # dApp(화면) 개발 디렉토리, dApp(truffle 연동 jsp)프로그램 존재  
-│  ├─bin              # express bin
+├─contracts             # Smart Contract (solidity) Source .sol  
+├─dApp                  # dApp  
+│  ├─bin               # express bin
 │  ├─node_modules
-│  ├─public           # express static web resource
+│  ├─public            # express static web resource
 │  │  ├─build         # compiled contract
 │  │  │  └─contracts
 │  │  ├─images
-│  │  ├─javascripts   # dApp에서 사용하는 truffle, web3, jquery 라이브러리  
-│  │  └─stylesheets   # dApp에서 사용하는 CSS  
-│  ├─routes           # express routesm, url path mapping
-│  └─views            # view source(ejs)
-├─migrations          # truffle 에서 사용하는 js로 web3로 배포(블록체인 노드에 등록)하는 프로그램  
-├─test                # truffle TEST에 사용  
-└─upload              # WEB 화면에서 file upload 시 file이 임시 저장되는 경로, system call에 의해 Swarm 서버에 전송 됨  
+│  │  ├─javascripts   # truffle, web3, jquery library(Used in dApp)
+│  │  └─stylesheets   # CSS (Used in dApp)
+│  ├─routes            # express routesm, url path mapping
+│  └─views             # view source(ejs)
+├─migrations            # js, Programs that distribute to web3 (Used in truffle)
+├─test                  # truffle TEST
+└─upload                # WEB file upload
 ```
 
 ## `Installation`
@@ -54,32 +55,32 @@
 > sudo npm install
 > ```
 
-## `기동절차`
+## `Running`
 
-> Swarm 기동
+> Start swarm server
 > ```cmd
 > cd <your-Geth-dir>
 > sudo swarm --bzzaccount <your-account-here>
 > ```
 
-> EVM 기동
+> Start EVM
 > ```text
 > cd <your-project-dir>
 > sudo npm run evm (= truffle develop --log)
 > ```
 
-> Contract migrate  
+> smart contract compilation  
 > ```text
 > // compile, migrate  
-> // express에서 사용할수 있도록 copy
+> // Copy for use in express
 > sudo npm run mig (= truffle migrate --reset --network develop ; cp ./build/contracts/*.json ./dApp/public/build/contracts/.)
 > ```
 
-> 초기데이터 등록  
+> WAS Start, initial data registration  
 > ```text
 > sudo npm start (= SET DEBUG=dApp:* & npm start) 
 > ```
-> http://localhost:3000/ 에서 초기화데이터 등록
+> Initialization Data Registration at http://localhost:3000/
 
 ## `License`
 
